@@ -1,9 +1,10 @@
 async function getPhotographers() {
     try {
-      const response = await fetch('./data/photographers.json');
+      const response = await fetch('/data/photographers.json');
       if (response.ok) {
         const data = await response.json();
-        return { photographers: data.photographers };
+        const photographers = data.photographers; // Déclaration de la variable photographers
+      return { photographers }; 
     }
   } catch (error) {
     console.error(error);
