@@ -3,8 +3,7 @@ async function getPhotographers() {
       const response = await fetch('/data/photographers.json');
       if (response.ok) {
         const data = await response.json();
-        const photographers = data.photographers; // Déclaration de la variable photographers
-      return { photographers }; 
+        return { photographers: data.photographers };
     }
   } catch (error) {
     console.error(error);

@@ -2,11 +2,12 @@
 <html>
 
 <head>
-  <link href="css/style.css" rel="stylesheet" type="text/css" />
   <meta charset="utf-8">
+  <title>Fisheye - photographe </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="css/style.css" rel="stylesheet" type="text/css" />
   <link rel="icon" type="image/png" href="assets/favicon.png">
   <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
-  <title>Fisheye - photographe </title>
 </head>
 
 <body>
@@ -15,7 +16,9 @@
   </header>
   <main id="main">
     <div class="photograph-header">
-      <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
+      <!--utiliser aria-describedby pour les champs de formulaire, boutons et liens-->
+      <button aria-label="Contactez-moi, Ouvrir le formulaire de contact" class="contact_button"
+        onclick="displayModal()">Contactez-moi</button>
     </div>
   </main>
   <div id="contact_modal">
@@ -24,12 +27,29 @@
         <h2>Contactez-moi</h2>
         <img src="assets/icons/close.svg" onclick="closeModal()" />
       </header>
-      <form>
+      <form aria-label="Formulaire de contact">
         <div>
-          <label>Prénom</label>
-          <input />
-        </div>
-        <button class="contact_button">Envoyer</button>
+          <div class="formData ">
+            <label for="firstname">Prénom</label><br>
+            <input class="text-control" type="text" id="first" name="first"><br>
+          </div>
+          <!--<div class="formData ">
+            <label for="lastname">Nom</label><br>
+            <input class="text-control" type="text" id="last" name="last"><br>
+          </div>
+          <div class="formData">
+            <label for="email">E-mail</label><br>
+            <input class="text-control" id="email" name="email"><br>
+          </div>
+          <div class="formData">
+            <label for="birthdate">Date de naissance</label><br>
+            <input class="text-control" type="date" id="birthdate" name="birthdate"><br>
+          </div>
+          <div class="formData">
+            <label for="message">Message</label><br>
+            <input class="text-control" type="text" id="message" name="message"><br>
+          </div>-->
+          <button aria-label="Envoyer le formulaire" class="contact_button">Envoyer</button>
       </form>
     </div>
   </div>
