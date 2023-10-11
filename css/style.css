@@ -1,5 +1,9 @@
 @import url("photographer.css");
-
+:root {
+    --primary-color: #901C1C; /* Couleur primaire */
+    --secondary-color: #DB8876; /* Couleur secondaire */
+    --title-color: #D3573C;
+  }
 body {
     font-family: "DM Sans", sans-serif;
     margin: 1em auto;
@@ -15,7 +19,7 @@ header {
 }
 
 h1 {
-    color: #901C1C;
+    color: var(--primary-color);;
     margin-right: 100px;
 }
 
@@ -45,7 +49,7 @@ a{
     align-items: center;
 }
 .photographer_section article h2 {
-    color: #D3573C;
+    color: var(--title-color);;
     font-size: 36px;
     margin-bottom: 0;
     font-weight: 100;
@@ -72,9 +76,17 @@ a{
 }
 .row{
     display: flex;
+    gap: 1.5em;
+    align-items: baseline;
+}
+.flexListbox{
+    display: flex;
+    gap: 1.5em;
+    align-items: baseline;
+    justify-content: space-between;
 }
 span{
-    color: #901C1C;
+    color: var(--primary-color);;
     font-weight: bold;
     display: contents;
     margin-bottom: 0;

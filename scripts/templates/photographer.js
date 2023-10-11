@@ -9,7 +9,7 @@ function photographerTemplate(data) {
         article.setAttribute('role', 'article');
         article.setAttribute('aria-label', `${name}, ${city}, ${country}`);
         article.innerHTML=`
-        <a href="#">
+        <a href="/photographer.html?id=${id}">
         <img src=${picture} alt="Portrait de ${name}, photographe">
         <h2>${name}</h2></a>
         <span>${city}, </span>

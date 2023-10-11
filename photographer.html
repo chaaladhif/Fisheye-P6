@@ -1,60 +1,73 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 
 <head>
   <meta charset="utf-8">
   <title>Fisheye - photographe </title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="css/style.css" rel="stylesheet" type="text/css" />
+  <link href="css/style.css" rel="stylesheet" type="text/css">
   <link rel="icon" type="image/png" href="assets/favicon.png">
   <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/427b58d00e.js" crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
 </head>
 
 <body>
   <header>
-    <img src="assets/images/logo.png" class="logo" />
+    <a href="/index.html">
+      <img src="assets/images/logo.png" class="logo" alt="logo de Fisheye">
+    </a>
   </header>
   <main id="main">
     <div class="photograph-header">
+      <div class="photograph-headerData">
+
+      </div>
       <!--utiliser aria-describedby pour les champs de formulaire, boutons et liens-->
-      <button aria-label="Contactez-moi, Ouvrir le formulaire de contact" class="contact_button"
-        onclick="displayModal()">Contactez-moi</button>
+      <button aria-label="Contactez-moi, Ouvrir le formulaire de contact" class="contact_button">Contactez-moi</button>
+
     </div>
+    <section>
+      <div class="row">
+        <h3>Trier par</h3>
+        <div role="listbox" tabindex="0" id="listbox1" onclick="return listItemClick(event);"
+          onkeydown="return listItemKeyEvent(event);" onkeypress="return listItemKeyEvent(event);">
+          <div class="flexListbox">
+            <div role="option" id="listbox1-1" class="selected">Popularité</div>
+            <i class="fa-solid fa-angle-up"></i>
+          </div>
+          <div class="flexListbox">
+            <div role="option" id="listbox1-2">Date</div><i class="fa-solid fa-angle-up"></i>
+          </div>
+          <div class="flexListbox">
+            <div role="option" id="listbox1-3">Titre</div>
+            <i class="fa-solid fa-angle-up"></i>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
   <div id="contact_modal">
     <div class="modal">
       <header>
-        <h2>Contactez-moi</h2>
-        <img src="assets/icons/close.svg" onclick="closeModal()" />
+        <h1 class="titleModal">Contactez-moi</h1>
+        <button aria-label="fermer la modale" class="close"><img src="assets/icons/close.svg"
+            alt="fermer la modale"></button>
       </header>
-      <form aria-label="Formulaire de contact">
-        <div>
+      <form aria-label="Formulaire de contact" id="form">
+        <div class="contentForm">
           <div class="formData ">
             <label for="firstname">Prénom</label><br>
-            <input class="text-control" type="text" id="first" name="first"><br>
+            <input class="text-control" aria-labelledby="firstname" aria-describedby="firstname-format" type="text"
+              id="firstname" name="firstname" required><br>
           </div>
-          <!--<div class="formData ">
-            <label for="lastname">Nom</label><br>
-            <input class="text-control" type="text" id="last" name="last"><br>
-          </div>
-          <div class="formData">
-            <label for="email">E-mail</label><br>
-            <input class="text-control" id="email" name="email"><br>
-          </div>
-          <div class="formData">
-            <label for="birthdate">Date de naissance</label><br>
-            <input class="text-control" type="date" id="birthdate" name="birthdate"><br>
-          </div>
-          <div class="formData">
-            <label for="message">Message</label><br>
-            <input class="text-control" type="text" id="message" name="message"><br>
-          </div>-->
           <button aria-label="Envoyer le formulaire" class="contact_button">Envoyer</button>
       </form>
     </div>
   </div>
-  <script src="/scripts/pages/photographer.js"></script>
-  <script src="/scripts/utils/contactForm.js"></script>
+
+  <script defer type="module" src="/scripts/pages/photographer.js"></script>
+  <script defer src="/scripts/utils/contactForm.js"></script>
 </body>
 
 </html>

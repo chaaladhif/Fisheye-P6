@@ -1,3 +1,10 @@
+body {
+    font-family: "DM Sans", sans-serif;
+    margin: 1em auto;
+}
+main{
+    margin: 0 100px; 
+}
 #contact_modal {
     display: none;
 }
@@ -5,9 +12,14 @@
 .photograph-header {
     background-color: #FAFAFA;
     height: 300px;
-    margin: 0 100px;
+    /*margin: 0 100px;*/
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
-
+.photograph-headerData h1{
+    color: var(--title-color);
+}
 .contact_button {
     font-size: 20px;
     font-weight: bold;
@@ -16,14 +28,21 @@
     width: 170px;
     height: 70px;
     border: none;
-    background-color: #901C1C;
+    background-color: var(--primary-color);
     border-radius: 5px;
     cursor: pointer;
 }
-
+.contact_button:hover, :focus{
+    background-color: var(--secondary-color);;
+}
+.imageMiniature{
+    height: 120px;
+    width: 120px;
+    border-radius: 50%;
+}
 .modal {
     border-radius: 5px;
-    background-color: #DB8876;
+    background-color: var(--secondary-color);;
     width: 50%;
     display: flex;
     flex-direction: column;
@@ -73,4 +92,15 @@ form input {
     height: 68px;
     border: none;
     border-radius: 5px;
+}
+#message{
+    height: 14em;
+}
+.close{
+    background-color: transparent;
+    border: none
+}
+.titleModal{
+    color: black;
+    font-size: 2.5em;
 }
