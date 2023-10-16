@@ -4,31 +4,25 @@ const fetchData = async () => {
         const response = await fetch('/data/photographers.json');
         if (response.ok) {
             const data = await response.json();
-            return { photographers: data.photographers };
+            return { photographers: data.photographers,
+            media: data.media};
         }
     } catch (error) {
         console.error(error);
     }
 };
 
-async function main() {
+async function pageId() {
     try {
-        const data = await fetchData(); // Attendre que les données soient chargées
-        // Ici, vous avez les données des photographes
-        // Vous pouvez maintenant extraire l'ID du photographe depuis les paramètres de l'URL
+        const data = await fetchData();
         let photographerId = new URL(window.location.href).searchParams.get('id');
-        console.log(photographerId);
-        //let photographerId = params.get('id');
         let photographerData = data.photographers;
-        console.log();
+        let mediaData = data.media; // Récupérez les données des médias
         let selectedPhotographer = photographerData.find((photographer) => photographer.id == photographerId);
-        console.log(selectedPhotographer);
+
         if (selectedPhotographer) {
-            // Utilisez les données du photographe pour afficher les détails
-            PhotographerPage(selectedPhotographer);
-            //console.log(PhotographerPage(selectedPhotographer));
+            PhotographerPage(selectedPhotographer, mediaData); // Passez les données des médias
         } else {
-            // Gérez le cas où aucun photographe correspondant n'a été trouvé
             console.error('Photographer not found');
         }
     } catch (error) {
@@ -36,31 +30,22 @@ async function main() {
     }
 }
 
-main();
+pageId();
 
-function PhotographerPage(data) {
-    const photographHeaderData=document.querySelector('.photograph-headerData')
-    const photographHeader=document.querySelector('.photograph-header')
-
-    const { name, portrait, id, city, country, tagline, price } = data;
-    const picture = `assets/photographers/${portrait}`;
-     // Créez une div pour l'image du photographe
-    // const imageDiv = document.createElement('div');
-     const photographerImage = document.createElement('img');
-     photographerImage.src = picture;
-     photographerImage.alt = `Portrait de ${name}, photographe`;
-     photographerImage.classList.add('imageMiniature')
-    const article = document.createElement('article');
-    article.innerHTML = `
-    <h1>${name}</h1>
-        <span>${city}, </span>
-        <span>${country}</span>
-        <p>${tagline}</p>
-    `;
-    photographHeader.appendChild(photographerImage)
-    photographHeaderData.appendChild(article); 
-    return article;
+ async function PhotographerPage(data, media) {
+    const main=document.getElementById('main')
+    const photographHeaderData = document.querySelector('.photograph-headerData');
+    const photographHeader = document.querySelector('.photograph-header');
+    //recuperer fonction header de factory
+    const photographerheader = photographerTemplate(data);
+    const userCardDOM = photographerheader.getHeaderPhotographer();
+    // Récupérez les médias spécifiques au photographe actuel
+    const photographerId = data.id;
+    const photographerMedia = media.filter(item => item.photographerId === photographerId); 
+     // Créez la structure pour les médias
+     const galery = document.querySelector('.galery');
+     photographerMedia.forEach(mediaItem => {
+         const mediaCard = mediaTemplate(mediaItem);
+         const mediaCardDOM = mediaCard.getMediaCardDOM();
+     });
 }
-
-  
-    

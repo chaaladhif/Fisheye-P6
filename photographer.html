@@ -13,37 +13,22 @@
 </head>
 
 <body>
-  <header>
+  <header role="banner photographer">
     <a href="/index.html">
-      <img src="assets/images/logo.png" class="logo" alt="logo de Fisheye">
+      <img src="assets/images/logo.png" class="logo" alt="logo de Fisheye" width="200" height="50">
     </a>
   </header>
   <main id="main">
     <div class="photograph-header">
       <div class="photograph-headerData">
-
+        <!--article-->
       </div>
       <!--utiliser aria-describedby pour les champs de formulaire, boutons et liens-->
       <button aria-label="Contactez-moi, Ouvrir le formulaire de contact" class="contact_button">Contactez-moi</button>
-
+      <!--img-->
     </div>
     <section>
-      <div class="row">
-        <h3>Trier par</h3>
-        <div role="listbox" tabindex="0" id="listbox1" onclick="return listItemClick(event);"
-          onkeydown="return listItemKeyEvent(event);" onkeypress="return listItemKeyEvent(event);">
-          <div class="flexListbox">
-            <div role="option" id="listbox1-1" class="selected">Popularité</div>
-            <i class="fa-solid fa-angle-up"></i>
-          </div>
-          <div class="flexListbox">
-            <div role="option" id="listbox1-2">Date</div><i class="fa-solid fa-angle-up"></i>
-          </div>
-          <div class="flexListbox">
-            <div role="option" id="listbox1-3">Titre</div>
-            <i class="fa-solid fa-angle-up"></i>
-          </div>
-        </div>
+      <div class="galery">
       </div>
     </section>
   </main>
@@ -54,20 +39,22 @@
         <button aria-label="fermer la modale" class="close"><img src="assets/icons/close.svg"
             alt="fermer la modale"></button>
       </header>
-      <form aria-label="Formulaire de contact" id="form">
+      <form aria-label="Formulaire de contact" action="" id="form" method="get" onsubmit="return validate(event);">
         <div class="contentForm">
           <div class="formData ">
             <label for="firstname">Prénom</label><br>
             <input class="text-control" aria-labelledby="firstname" aria-describedby="firstname-format" type="text"
               id="firstname" name="firstname" required><br>
           </div>
-          <button aria-label="Envoyer le formulaire" class="contact_button">Envoyer</button>
+          <button aria-label="Envoyer le formulaire" class="contact_button" id="btnSubmit">Envoyer</button>
       </form>
     </div>
   </div>
 
-  <script defer type="module" src="/scripts/pages/photographer.js"></script>
-  <script defer src="/scripts/utils/contactForm.js"></script>
+  <script defer src="/scripts/pages/photographer.js"></script>
+  <script defer src="/scripts/factories/photographer.js"></script>
+  <script defer src="/scripts/factories/media.js"></script>
+  <script defer src="/scripts/user/contactForm.js"></script>
 </body>
 
 </html>

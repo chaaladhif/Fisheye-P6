@@ -19,7 +19,7 @@ header {
 }
 
 h1 {
-    color: var(--primary-color);;
+    color: var(--primary-color);
     margin-right: 100px;
 }
 
@@ -42,14 +42,14 @@ h1 {
     align-items: center;
     flex-direction: column;
 }
-a{
+ .linkArticle{
     text-decoration: none;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 .photographer_section article h2 {
-    color: var(--title-color);;
+    color: var(--title-color);
     font-size: 36px;
     margin-bottom: 0;
     font-weight: 100;
@@ -58,7 +58,7 @@ a{
 .photographer_section article img {
     height: 200px;
     width: 200px;
-    
+    object-fit: cover;
     border-radius: 50%;
 }
 .photographer_section article p
@@ -66,6 +66,9 @@ a{
     font-size: 0.7em;
     margin-bottom: 0;
     margin-top: 0;
+}
+.tagline{
+    color: #545454;
 }
 .photographer_section article p:last-child
 {
@@ -85,10 +88,18 @@ a{
     align-items: baseline;
     justify-content: space-between;
 }
-span{
-    color: var(--primary-color);;
+ .red{
+    color: var(--primary-color);
     font-weight: bold;
     display: contents;
     margin-bottom: 0;
     margin-top: 0;
+}
+.red:hover{
+    color: var(--secondary-color);
+}
+.likes{
+    color: var(--primary-color);
+    display: flex;
+    gap: 0.5em;
 }
