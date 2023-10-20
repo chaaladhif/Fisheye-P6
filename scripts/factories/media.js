@@ -42,12 +42,18 @@ function mediaTemplate(media) {
             sourceElement.src = `assets/images/${photographerId}/${video}`;
             sourceElement.type = 'video/mp4';
             videoElement.appendChild(sourceElement);
+            const track=document.createElement('track');
+            track.kind="subtitles";
+            track.src="video.en.vtt"
+            track.srclang="en";
+            track.label="Anglais";
+            videoElement.appendChild(track)
             const divRow = document.createElement('div');
             divRow.classList.add('rowfigure');
             const h2 = document.createElement('h2');
             h2.textContent = title;
             const likesContainer = document.createElement('div');
-            likesContainer.classList.add('red');
+            likesContainer.classList.add('likes');
             const likesSpan = document.createElement('span');
             likesSpan.textContent = likes;
             const heartIcon = document.createElement('span');

@@ -18,12 +18,13 @@ async function pageId() {
         let photographerId = new URL(window.location.href).searchParams.get('id');
         let photographerData = data.photographers;
         let mediaData = data.media; // Récupérez les données des médias
-        let selectedPhotographer = photographerData.find((photographer) => photographer.id == photographerId);
-
-        if (selectedPhotographer) {
-            PhotographerPage(selectedPhotographer, mediaData); // Passez les données des médias
-        } else {
-            console.error('Photographer not found');
+        if (photographerId) {
+            const selectedPhotographer = photographerData.find((photographer) => photographer.id == photographerId);
+            if (selectedPhotographer) {
+                PhotographerPage(selectedPhotographer, mediaData);
+            } else {
+                console.error('Photographer not found');
+            }
         }
     } catch (error) {
         console.error(error);
@@ -33,19 +34,19 @@ async function pageId() {
 pageId();
 
  async function PhotographerPage(data, media) {
-    const main=document.getElementById('main')
-    const photographHeaderData = document.querySelector('.photograph-headerData');
+    //const photographHeaderData = document.querySelector('.photograph-headerData');
     const photographHeader = document.querySelector('.photograph-header');
     //recuperer fonction header de factory
-    const photographerheader = photographerTemplate(data);
-    const userCardDOM = photographerheader.getHeaderPhotographer();
+   // const photographerheader = photographerTemplate(data);
+    const userCardDOM =  photographerTemplate(data).getHeaderPhotographer();
     // Récupérez les médias spécifiques au photographe actuel
     const photographerId = data.id;
     const photographerMedia = media.filter(item => item.photographerId === photographerId); 
      // Créez la structure pour les médias
      const galery = document.querySelector('.galery');
      photographerMedia.forEach(mediaItem => {
-         const mediaCard = mediaTemplate(mediaItem);
-         const mediaCardDOM = mediaCard.getMediaCardDOM();
+    //const mediaCard = mediaTemplate(mediaItem);
+    const mediaCardDOM = mediaTemplate(mediaItem).getMediaCardDOM();
      });
+     
 }

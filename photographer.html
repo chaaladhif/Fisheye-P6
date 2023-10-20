@@ -13,12 +13,12 @@
 </head>
 
 <body>
-  <header role="banner photographer">
+  <header>
     <a href="/index.html">
       <img src="assets/images/logo.png" class="logo" alt="logo de Fisheye" width="200" height="50">
     </a>
   </header>
-  <main id="main">
+  <main id="main" aria-hidden="false">
     <div class="photograph-header">
       <div class="photograph-headerData">
         <!--article-->
@@ -32,21 +32,23 @@
       </div>
     </section>
   </main>
-  <div id="contact_modal">
+  <div id="contact_modal" aria-hidden="true" role=”dialog”>
     <div class="modal">
       <header>
-        <h1 class="titleModal">Contactez-moi</h1>
+        <h1 class="titleModal">Contactez-moi </h1>
         <button aria-label="fermer la modale" class="close"><img src="assets/icons/close.svg"
             alt="fermer la modale"></button>
       </header>
       <form aria-label="Formulaire de contact" action="" id="form" method="get" onsubmit="return validate(event);">
         <div class="contentForm">
-          <div class="formData ">
+          <div class="formData">
             <label for="firstname">Prénom</label><br>
-            <input class="text-control" aria-labelledby="firstname" aria-describedby="firstname-format" type="text"
-              id="firstname" name="firstname" required><br>
+            <input class="text-control" aria-label="firstname" type="text" id="firstname" name="firstname" minlength="2"
+              required><br>
           </div>
-          <button aria-label="Envoyer le formulaire" class="contact_button" id="btnSubmit">Envoyer</button>
+
+        </div>
+        <button aria-label="Envoyer le formulaire" class="contact_button" type="submit" id="btnSubmit">Envoyer</button>
       </form>
     </div>
   </div>
@@ -54,7 +56,7 @@
   <script defer src="/scripts/pages/photographer.js"></script>
   <script defer src="/scripts/factories/photographer.js"></script>
   <script defer src="/scripts/factories/media.js"></script>
-  <script defer src="/scripts/user/contactForm.js"></script>
+  <script src="/scripts/user/contactForm.js"></script>
 </body>
 
 </html>
