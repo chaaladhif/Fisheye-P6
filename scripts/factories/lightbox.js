@@ -1,5 +1,5 @@
-function lightbox(){
-    modal.innerHTML=`<ul class="carousel" aria-label="Our selection of Recipes">
+const openLightbox=()=>{
+    modal.innerHTML=`<ul class="carousel" aria-label="lightbox">
     <li class="carousel-item item-0" aria-hidden="false">
         <div role="button" class="controls controls-left">
             <span class="img prev-image">
@@ -136,3 +136,5 @@ $(document).ready(function() {
 })
 
 }
+openLightbox()
+//export {openLightbox};

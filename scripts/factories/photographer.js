@@ -43,14 +43,11 @@ function photographerTemplate(data) {
     }
     function getHeaderPhotographer(){
         // coder la structure du header 
-    const photographHeaderData = document.querySelector('.photograph-headerData');
-    const photographHeader = document.querySelector('.photograph-header');
-    const photographerImage = document.createElement('img');
-    const article = document.createElement('article');
-    article.classList.add('photographer-card');
-    article.setAttribute('role', 'article');
-    article.setAttribute('aria-label', `${name}, ${city}, ${country}`);
-
+    const divDetails = document.createElement('div');
+    divDetails.classList.add('photograph-headerData');
+    divDetails.setAttribute('role', 'article');
+    divDetails.setAttribute('aria-label', `${name}, ${city}, ${country}`);
+     
     // Crée un titre h1
     const h1 = document.createElement('h1');
     h1.textContent = name;
@@ -61,23 +58,30 @@ function photographerTemplate(data) {
     const countrySpan = document.createElement('span');
     countrySpan.classList.add('red');
     countrySpan.textContent = country;
-    // Crée le paragraphe pour le tagline
+    // Créer le paragraphe pour le tagline
     const taglinePara = document.createElement('p');
     taglinePara.classList.add('tagline')
     taglinePara.textContent = tagline;
     // Structure les éléments
-    article.appendChild(h1);
-    article.appendChild(citySpan);
-    article.appendChild(document.createTextNode(', ')); // Ajoute une virgule
-    article.appendChild(countrySpan);
-    article.appendChild(taglinePara);
+    divDetails.appendChild(h1);
+    divDetails.appendChild(citySpan);
+    divDetails.appendChild(document.createTextNode(', ')); 
+    divDetails.appendChild(countrySpan);
+    divDetails.appendChild(taglinePara);
+    
+    const photographerImage = document.createElement('img');
     photographerImage.src = picture;
     photographerImage.alt = `Portrait de ${name}, photographe`;
     photographerImage.classList.add('imageMiniature');
+     
+    const photographHeader = document.querySelector(".photograph-header");
+    photographHeader.appendChild(divDetails);
+    const mainContact = document.getElementById("main_contact");
+    // Insérez divDetails avant le bouton de contact
+    mainContact.insertBefore(divDetails, mainContact.querySelector(".contact_button"));
     photographHeader.appendChild(photographerImage);
-    photographHeaderData.appendChild(article);
-    /*photographHeader.insertAdjacentElement('afterbegin', article)*/
-    return article;
+
+    return photographHeader;
     }
     return { name, picture,  city, country, tagline, price, getUserCardDOM,getHeaderPhotographer }
 }

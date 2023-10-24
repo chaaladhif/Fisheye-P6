@@ -143,6 +143,9 @@ form input {
     font-size: 2.5em;
 }
 .galery{
+    
+}
+.media-container{
     display: flex;
     flex-wrap: wrap;
     width: 100%;
@@ -161,6 +164,7 @@ figure{
 video{
     width: 80%;
     height: 17em;
+    object-fit: cover;
 }
 figure:hover .imageGalery {
     transform: scale(1.05);
@@ -170,7 +174,7 @@ figure h2{
     color: #901C1C;
 }
 p{
-    color: #757575;
+   /* color: #757575;*/
 }
 .rowfigure{
     display: flex;
@@ -178,10 +182,18 @@ p{
     justify-content: space-between;
     width: 83%;
 }   
-.price{
+footer{
+    display: flex;
+    gap: 1em;
+    border-radius: 3px;
+    position: fixed;
+    bottom: 0;
+    right: 6em;
     float: right;
-    background-color:var(--title-color);
-    padding: 1em;
+    background-color:#DB8876;
+    padding: 0 1em;
+    color: black;
+    font-weight: 600;
 } 
 /*carousel*/
 .sr-only {
@@ -250,3 +262,22 @@ p{
  .next-image {
     right: 20px;
  }
+ .ptri{
+    color: #000;
+    font-size: 18px;
+    margin: 0;
+ }
+ .triContainer{
+display: flex;
+gap: 1em;
+ }
+ .select-container{
+    display: flex;
+    flex-direction: column;
+ }
+ select{
+    border: none;
+    background-color: #901C1C;
+    padding: 0.9em;
+    color: #fff;
+}

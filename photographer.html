@@ -19,18 +19,16 @@
     </a>
   </header>
   <main id="main" aria-hidden="false">
-    <div class="photograph-header">
-      <div class="photograph-headerData">
-        <!--article-->
-      </div>
-      <!--utiliser aria-describedby pour les champs de formulaire, boutons et liens-->
+    <section class="photograph-header" id="main_contact">
       <button aria-label="Contactez-moi, Ouvrir le formulaire de contact" class="contact_button">Contactez-moi</button>
-      <!--img-->
-    </div>
-    <section>
-      <div class="galery">
+    </section>
+    <section class="galery">
+      <div class="triContainer">
+
       </div>
     </section>
+    <div class="photographfooter">
+    </div>
   </main>
   <div id="contact_modal" aria-hidden="true" role=”dialog”>
     <div class="modal">
@@ -52,11 +50,15 @@
       </form>
     </div>
   </div>
+  <footer>
 
+  </footer>
   <script defer src="/scripts/pages/photographer.js"></script>
   <script defer src="/scripts/factories/photographer.js"></script>
-  <script defer src="/scripts/factories/media.js"></script>
+  <script src="/scripts/factories/media.js"></script>
   <script src="/scripts/user/contactForm.js"></script>
+  <script src="/scripts/user/tri.js"></script>
+  <script src="/scripts/factories/lightbox.js"></script>
 </body>
 
 </html>

@@ -10,7 +10,10 @@ const onOpenModal = () => {
   modal.setAttribute('aria-hidden', 'false');
   body.classList.add('no-scroll');
   modal.style.display = 'flex';
+  modal.setAttribute('tabIndex', 2);
   closeButton.focus();
+  body.setAttribute('tabIndex', 1);
+  
  }
 
  const onCloseModal = () => {
@@ -18,7 +21,10 @@ const onOpenModal = () => {
   modal.setAttribute('aria-hidden', 'true');
   body.classList.remove('no-scroll');
   modal.style.display = 'none';
+  body.removeAttribute('tabIndex');
+  modal.removeAttribute('tabIndex');
   contactButton.focus();
+
  }
  //fermer en cliquant sur echap
  document.addEventListener('keydown', function (e) {

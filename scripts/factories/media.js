@@ -1,3 +1,4 @@
+//import {openLightbox} from './lightbox'
 function mediaTemplate(media) {
     const { id, photographerId, title, image, video,  likes, date, price } = media;
 
@@ -7,10 +8,11 @@ function mediaTemplate(media) {
         figure.classList.add('photographer-card');
         figure.setAttribute('role', 'figure');
         figure.setAttribute('aria-label', title);
+        //figure.addEventListener('click', openLightbox());
         if(image)
         {
     const a = document.createElement('a');
-    a.href = '#';
+    a.href = '/scripts/factories/lightbox.js';
     const img = document.createElement('img');
     img.classList.add('imageGalery');
     img.src = `assets/images/${photographerId}/${image}`;
