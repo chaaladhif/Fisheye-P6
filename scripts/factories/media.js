@@ -12,7 +12,7 @@ function mediaTemplate(media) {
         if(image)
         {
     const a = document.createElement('a');
-    a.href = '/scripts/factories/lightbox.js';
+    a.href = '#';
     const img = document.createElement('img');
     img.classList.add('imageGalery');
     img.src = `assets/images/${photographerId}/${image}`;
