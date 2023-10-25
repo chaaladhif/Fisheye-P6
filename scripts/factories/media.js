@@ -1,4 +1,3 @@
-//import {openLightbox} from './lightbox'
 function mediaTemplate(media) {
     const { id, photographerId, title, image, video,  likes, date, price } = media;
 
@@ -8,7 +7,7 @@ function mediaTemplate(media) {
         figure.classList.add('photographer-card');
         figure.setAttribute('role', 'figure');
         figure.setAttribute('aria-label', title);
-        //figure.addEventListener('click', openLightbox());
+        
         if(image)
         {
     const a = document.createElement('a');
@@ -17,6 +16,9 @@ function mediaTemplate(media) {
     img.classList.add('imageGalery');
     img.src = `assets/images/${photographerId}/${image}`;
     img.alt = `Portrait de ${title}, photographe`;
+    img.addEventListener('click', () => openLightbox(media));
+
+    /*img.setAttribute('onclick', openLightbox())*/
     a.appendChild(img);
     const divRow = document.createElement('div');
     divRow.classList.add('rowfigure');
@@ -70,7 +72,6 @@ function mediaTemplate(media) {
     galery.appendChild(figure);
     return figure;
         }
-        
     return { id, photographerId, title, image, video,  likes, date, price, getMediaCardDOM }
     
 }

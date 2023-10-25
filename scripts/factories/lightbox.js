@@ -1,140 +1,85 @@
-const openLightbox=()=>{
-    modal.innerHTML=`<ul class="carousel" aria-label="lightbox">
-    <li class="carousel-item item-0" aria-hidden="false">
-        <div role="button" class="controls controls-left">
-            <span class="img prev-image">
-                <i aria-hidden="true" class="fa fa-arrow-circle-left"></i>
-            </span>
-            <p class="sr-only">Previous</p>
+const openLightbox = (media) => {
+    const { id, photographerId, title, image, video,  likes, date, price } = media;
+    const modal = document.getElementById("lightbox_modal");
+    modal.innerHTML = `<div id="modal">
+    <button aria-label="fermer la modale" id="close"><i class="fa-solid fa-xmark"></i>
+</button>
+  <div class="column">
+            <img src="assets/images/${photographerId}/${image}" class="imageLightbox">
+        
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>;
         </div>
-        <div role="button" class="controls controls-right">
-            <span class="image next-image">
-                <i aria-hidden="true" class="fa fa-arrow-circle-right"></i>
-            </span>
-            <p class="sr-only">Next</p>
-        </div>
-        <div class="caroussel-title">
-            <h2>Item 1</h2>
-        </div>
-    </li>
-    <li class="carousel-item item-1" aria-hidden="true">
-        <div role="button" class="controls controls-left">
-            <span class="image prev-image">
-                <i aria-hidden="true" class="fa fa-arrow-circle-left"></i>
-            </span>
-            <p class="sr-only">Previous</p>
-        </div>
-        <div role="button" class="controls controls-right">
-            <span class="image next-image">
-                <i aria-hidden="true" class="fa fa-arrow-circle-right"></i>
-            </span>
-            <p class="sr-only">Next</p>
-        </div>
-        <div class="caroussel-title">
-            <h2>Item 2</h2>
-        </div>
-    </li>
-    <li class="carousel-item item-2" aria-hidden="true">
-        <div role="button" class="controls controls-left">
-            <span class="image prev-image">
-                <i aria-hidden="true" class="fa fa-arrow-circle-left"></i>
-            </span>
-            <p class="sr-only">Previous</p>
-        </div>
-        <div role="button" class="controls controls-right">
-            <span class="image next-image">
-                <i aria-hidden="true" class="fa fa-arrow-circle-right"></i>
-            </span>
-            <p class="sr-only">Next</p>
-        </div>
-        <div class="caroussel-title">
-            <h2>Item 3</h2>
-        </div>
-    </li>
-</ul>`
-// Global var
-const $prevBtn = $('.prev-image')
-const $nextBtn = $('.next-image')
-const $carouselItems = $('.carousel-item')
-const $carouselPauseBtn = $('.carousel-pause-btn')
- 
-let currentItemPosition = 0
-let carouselInterval
- 
-// Funcs
-const goToNextSlide = () => {
-   if (currentItemPosition + 1 >=  $carouselItems.length) {
-      
-       const lastItem = `.item-${currentItemPosition}`
- 
-       currentItemPosition = 0
-       const currentItem = `.item-${currentItemPosition}`
-      
-       setNodeAttributes(lastItem, currentItem)
-   } else {
-       currentItemPosition += 1
-       const lastItem = `.item-${currentItemPosition - 1}`
-       const currentItem = `.item-${currentItemPosition}`
-      
-       setNodeAttributes(lastItem, currentItem)
-   }
-}
- 
-const goToPreviousSlide = () => {
-   if (currentItemPosition - 1 >=  0) {
-       currentItemPosition -= 1
-       const currentItem = `.item-${currentItemPosition}`
-       const lastItem = `.item-${currentItemPosition + 1}`
- 
-       setNodeAttributes(lastItem, currentItem)
-   } else {
-       const lastItem = `.item-${currentItemPosition}`
-      
-       currentItemPosition = 2
-       const currentItem = `.item-${currentItemPosition}`
-      
-       setNodeAttributes(lastItem, currentItem)
-   }
-}
- 
- 
-const setNodeAttributes = (lastItem, currentItem) => {
-   $(lastItem).css('display', 'none')
-   $(currentItem).css('display', 'block')
-   $(lastItem).attr('aria-hidden', 'true')
-   $(currentItem).attr('aria-hidden', 'false')
-}
- 
- 
-// Events
-$prevBtn.click(function() {
-   goToPreviousSlide()
-})
- 
-$nextBtn.click(function() {
-   goToNextSlide()
-})
- 
- 
-$(document).keydown(function(e) {
-   const keyCode = e.keyCode ? e.keyCode : e.which
- 
-   if (keyCode === 39) {
-       goToNextSlide()
-   } else if (keyCode === 37) {
-       goToPreviousSlide()
-   }
-})
- 
-$carouselPauseBtn.on('click', function() {
-   clearInterval(carouselInterval)
-})
- 
- 
-$(document).ready(function() {
-   carouselInterval = setInterval(() => goToNextSlide(), 5000)
-})
+        </div>`
+   /* 
+        <div class="modal-content">
+            <div class="mySlides">
+                <img src="" style="width:100%">
+            </div>
+            <div class="mySlides">
+                <img src="" style="width:100%">
+            </div>
+            <div class="mySlides">
+                <img src="" style="width:100%">
+            </div>
+            <div class="mySlides">
+                <img src="" style="width:100%">
+            </div>
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+            <div class="caption-container">
+                <p id="caption"></p>
+            </div>
+        </div>;*/
 
-}
-openLightbox()
-//export {openLightbox};
+    // Global vars
+   /* photographerMedia.forEach((mediaItem, index) => {
+        if (mediaItem.image) {
+            const imageUrl = `assets/images/${photographerId}/${mediaItem.image}`;
+
+            // Create a new slide for each image
+            const slide = document.createElement('div');
+            slide.classList.add('mySlides');
+            slide.innerHTML = `
+                <img src="${imageUrl}" style="width:100%">
+            `;
+
+            modal.querySelector(".modal-content").appendChild(slide);
+        }
+    });*/
+const close=document.getElementById('close')
+
+    function openModal() {
+        modal.style.display = "block";
+    }
+    
+    function closeModal() {
+        modal.style.display = "none";
+    }
+    close.addEventListener('click', closeModal())
+   
+   /* let slideIndex = 1;
+    showSlides(slideIndex);
+    showSlides(1);
+
+    function plusSlides(n) {
+        showSlides(slideIndex += n);
+    }
+
+    function currentSlide(n) {
+        showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+        const slides = document.querySelectorAll(".mySlides");
+        const captionText = document.getElementById("caption");
+        if (n > slides.length) slideIndex = 1;
+        if (n < 1) slideIndex = slides.length;
+        for (let i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+
+        slides[slideIndex - 1].style.display = "block";
+    }*/
+    openModal()
+};

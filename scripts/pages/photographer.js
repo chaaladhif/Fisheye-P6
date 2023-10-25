@@ -18,6 +18,7 @@ async function pageId() {
         let photographerId = new URL(window.location.href).searchParams.get('id');
         let photographerData = data.photographers;
         let mediaData = data.media; // Récupérez les données des médias
+        //console.log( mediaData); 
         if (photographerId) {
             const selectedPhotographer = photographerData.find((photographer) => photographer.id == photographerId);
             if (selectedPhotographer) {
@@ -51,29 +52,25 @@ divMediaContainer.classList.add('media-container');
     const mediaCardDOM = mediaTemplate(mediaItem).getMediaCardDOM();
     divMediaContainer.appendChild(mediaCardDOM);
     galery.appendChild(divMediaContainer);
-    
+
      });
-     const photographerprice = data.price;
-     // Crée un élément p pour afficher la somme
-     // Supposons que mediaData contient toutes les données des médias
-     let totalLikes = 0;
-     
-     // Parcourez tous les médias pour calculer la somme des likes
-     for (let i = 0; i < photographerMedia.length; i++) {
-         totalLikes += photographerMedia[i].likes;
-       }
-     
+        //footer
+ const photographerprice = data.price;
+ // Crée un élément p pour afficher la somme
+ let totalLikes = 0;
+ // Parcourez tous les médias pour calculer la somme des likes
+ for (let i = 0; i < photographerMedia.length; i++) {
+     totalLikes += photographerMedia[i].likes;
+   }
      // Créez un élément p pour afficher la somme
      const somme = document.createElement('p');
      somme.classList.add("somme");
      somme.innerHTML = `${totalLikes} <i class="fa-solid fa-heart size"></i>`;
-     
-     // Ajoutez l'élément au footer
      footer.appendChild(somme);
-     
      // Crée un élément p pour afficher le prix
      const price = document.createElement('p');
      price.classList.add('price');
      price.innerHTML = photographerprice + '€ / jour';
      footer.appendChild(price);
+
 }
