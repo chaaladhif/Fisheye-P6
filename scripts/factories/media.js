@@ -1,4 +1,4 @@
-function mediaTemplate(media) {
+function mediaTemplate(media, data) {
     const { id, photographerId, title, image, video,  likes, date, price } = media;
 
     function getMediaCardDOM() {
@@ -46,6 +46,7 @@ function mediaTemplate(media) {
             sourceElement.src = `assets/images/${photographerId}/${video}`;
             sourceElement.type = 'video/mp4';
             videoElement.appendChild(sourceElement);
+            //videoElement.addEventListener('click', () => openLightbox(media));
             const track=document.createElement('track');
             track.kind="subtitles";
             track.src="video.en.vtt"

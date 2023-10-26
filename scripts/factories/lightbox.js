@@ -1,85 +1,89 @@
-const openLightbox = (media) => {
-    const { id, photographerId, title, image, video,  likes, date, price } = media;
+
+async function  openLightbox (media) {
+    const data = await fetchData();
+    const mediaa = data.media
+    const { id, photographerId, title, image, video } = media;
     const modal = document.getElementById("lightbox_modal");
+    //const photographerModel = mediaTemplate(media);
+    //const photographerId = data.id;
+    const photographerMedia = mediaa.filter(item => item.photographerId === photographerId); 
+    const mediaCardDOM = mediaTemplate(media).getMediaCardDOM();
     modal.innerHTML = `<div id="modal">
     <button aria-label="fermer la modale" id="close"><i class="fa-solid fa-xmark"></i>
 </button>
   <div class="column">
             <img src="assets/images/${photographerId}/${image}" class="imageLightbox">
-        
-        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-        <a class="next" onclick="plusSlides(1)">&#10095;</a>;
+       <span class='red'>${title}</span> 
+        <a class="prev">&#10094;</a>
+        <a class="next">&#10095;</a>
         </div>
         </div>`
-   /* 
-        <div class="modal-content">
-            <div class="mySlides">
-                <img src="" style="width:100%">
-            </div>
-            <div class="mySlides">
-                <img src="" style="width:100%">
-            </div>
-            <div class="mySlides">
-                <img src="" style="width:100%">
-            </div>
-            <div class="mySlides">
-                <img src="" style="width:100%">
-            </div>
-            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-            <a class="next" onclick="plusSlides(1)">&#10095;</a>
-            <div class="caption-container">
-                <p id="caption"></p>
-            </div>
-        </div>;*/
+         // Vérifier si photographerMedia est défini et n'est pas nul
+    if (photographerMedia && photographerMedia.length > 0) {
+        const images = photographerMedia.filter(item => item.image); // Filtrer les médias avec des images uniquement
+        let currentIndex = images.findIndex(item => item.id === id);
 
-    // Global vars
-   /* photographerMedia.forEach((mediaItem, index) => {
-        if (mediaItem.image) {
-            const imageUrl = `assets/images/${photographerId}/${mediaItem.image}`;
+        const imageElement = document.querySelector(".imageLightbox");
 
-            // Create a new slide for each image
-            const slide = document.createElement('div');
-            slide.classList.add('mySlides');
-            slide.innerHTML = `
-                <img src="${imageUrl}" style="width:100%">
-            `;
+        const prevButton=document.querySelector('.prev')
+        const nextButton=document.querySelector('.next')
+        let i=0;
+        const previous=()=>{
 
-            modal.querySelector(".modal-content").appendChild(slide);
-        }
-    });*/
-const close=document.getElementById('close')
+ if (i > 0) {
+                i--;
+                updateImage();
+        }}
+        const next=()=>{
+            if (i < images.length - 1) {
+                i++;
+                updateImage();
+        }}
+        const updateImage = () => {
+            const currentImage = images[i];
+            imageElement.src = `assets/images/${photographerId}/${currentImage.image}`;
+        };
+        prevButton.addEventListener('click', previous)
+        nextButton.addEventListener('click', next)
+
+const close=document.querySelector('#close')
 
     function openModal() {
         modal.style.display = "block";
     }
-    
+    close.addEventListener('click', closeModal)
     function closeModal() {
         modal.style.display = "none";
+        onCloseModal()
     }
-    close.addEventListener('click', closeModal())
-   
-   /* let slideIndex = 1;
-    showSlides(slideIndex);
-    showSlides(1);
-
-    function plusSlides(n) {
-        showSlides(slideIndex += n);
+    const onOpenModal = () => {
+        body.setAttribute('aria-hidden', 'true');
+        modal.setAttribute('aria-hidden', 'false');
+        body.classList.add('no-scroll');
+        modal.style.display = 'flex';
+        //modal.setAttribute('tabIndex', 2);
+        close.focus();
+        //body.setAttribute('tabIndex', 1);
+        
+       }
+      
+       const onCloseModal = () => {
+        body.setAttribute('aria-hidden', 'false');
+        modal.setAttribute('aria-hidden', 'true');
+        body.classList.remove('no-scroll');
+        modal.style.display = 'none';}
+        //body.removeAttribute('tabIndex');
+       // modal.removeAttribute('tabIndex');
+        //contactButton.focus();
+      
+     //fermer en cliquant sur echap
+ document.addEventListener('keydown', function (e) {
+    const keyCode = e.keyCode ? e.keyCode : e.which
+  
+    if (modal.style.display === "block" && keyCode === 27) {
+      closeModal()
     }
+  });
 
-    function currentSlide(n) {
-        showSlides(slideIndex = n);
-    }
-
-    function showSlides(n) {
-        const slides = document.querySelectorAll(".mySlides");
-        const captionText = document.getElementById("caption");
-        if (n > slides.length) slideIndex = 1;
-        if (n < 1) slideIndex = slides.length;
-        for (let i = 0; i < slides.length; i++) {
-            slides[i].style.display = "none";
-        }
-
-        slides[slideIndex - 1].style.display = "block";
-    }*/
     openModal()
-};
+}};

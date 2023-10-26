@@ -79,8 +79,7 @@ function photographerTemplate(data) {
     const mainContact = document.getElementById("main_contact");
     // Insérez divDetails avant le bouton de contact
     mainContact.insertBefore(divDetails, mainContact.querySelector(".contact_button"));
-    photographHeader.appendChild(photographerImage);
-
+    photographHeader.appendChild(photographerImage); 
     return photographHeader;
     }
     return { name, picture,  city, country, tagline, price, getUserCardDOM,getHeaderPhotographer }

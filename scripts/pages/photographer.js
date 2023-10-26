@@ -31,9 +31,7 @@ async function pageId() {
         console.error(error);
     }
 }
-
 pageId();
-
  async function PhotographerPage(data, media) {
     const galery=document.querySelector('.galery')
     const footer=document.querySelector('footer')
@@ -52,7 +50,6 @@ divMediaContainer.classList.add('media-container');
     const mediaCardDOM = mediaTemplate(mediaItem).getMediaCardDOM();
     divMediaContainer.appendChild(mediaCardDOM);
     galery.appendChild(divMediaContainer);
-
      });
         //footer
  const photographerprice = data.price;
@@ -72,5 +69,4 @@ divMediaContainer.classList.add('media-container');
      price.classList.add('price');
      price.innerHTML = photographerprice + '€ / jour';
      footer.appendChild(price);
-
 }
