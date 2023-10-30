@@ -16,30 +16,23 @@ async function pageId() {
     try {
         const data = await fetchData();
         let photographerId = new URL(window.location.href).searchParams.get('id');
-        let photographerData = data.photographers;
-        let mediaData = data.media; // Récupérez les données des médias
-        //console.log( mediaData); 
         if (photographerId) {
-            const selectedPhotographer = photographerData.find((photographer) => photographer.id == photographerId);
-            if (selectedPhotographer) {
-                PhotographerPage(selectedPhotographer, mediaData);
-            } else {
-                console.error('Photographer not found');
-            }
+            let selectedPhotographer = data.photographers.find((photographer) => photographer.id == photographerId);
+            let mediaPhotographer = data.media.filter((media => media.photographerId == photographerId)); // Récupérez les données des médias
+            PhotographerPage(selectedPhotographer, mediaPhotographer);
         }
     } catch (error) {
         console.error(error);
     }
 }
 pageId();
- async function PhotographerPage(data, media) {
-    const galery=document.querySelector('.galery')
-    const footer=document.querySelector('footer')
-    const photographerId = data.id;
-    const photographerMedia = media.filter(item => item.photographerId === photographerId); 
-// Création du conteneur pour les médias
-const divMediaContainer = document.createElement('div');
-divMediaContainer.classList.add('media-container');
+ async function PhotographerPage(data, photographerMedia) {
+    const galery=document.querySelector('.galery');
+    const footer=document.querySelector('footer');
+    let listPicture =[];
+    // Création du conteneur pour les médias
+    const divMediaContainer = document.createElement('div');
+    divMediaContainer.classList.add('media-container');
     const photographerModel = photographerTemplate(data);
     const header =  photographerModel.getHeaderPhotographer();
     document.getElementById("main").appendChild(header);
@@ -47,16 +40,29 @@ divMediaContainer.classList.add('media-container');
     // Récupérez les médias spécifiques au photographe actuel
      // Créez la structure pour les médias
      photographerMedia.forEach(mediaItem => {
-    const mediaCardDOM = mediaTemplate(mediaItem).getMediaCardDOM();
+     const mediaModel = mediaTemplate(mediaItem);
+    const mediaCardDOM = mediaModel.getMediaCardDOM();
+    listPicture.push(mediaModel.mediaPath);
+    //console.log(listPicture);
     divMediaContainer.appendChild(mediaCardDOM);
     galery.appendChild(divMediaContainer);
+    //modalightbox.appendChild(modalContainer);
+    // Ajoutez un gestionnaire d'événements pour chaque image/vidéo
+    mediaCardDOM.addEventListener('click', () => { 
+    // creation de la modale dans le dom
+    const lightboxmodal=document.getElementById('lightbox_modal')
+    const lightboxModel = getLightboxPhotographer(mediaItem, listPicture);
+    const modalContainer = document.getElementById("modal");
+    // Ajoutez le conteneur de la lightbox au DOM
+    lightboxmodal.appendChild(modalContainer);
+    })
      });
-        //footer
- const photographerprice = data.price;
- // Crée un élément p pour afficher la somme
- let totalLikes = 0;
- // Parcourez tous les médias pour calculer la somme des likes
- for (let i = 0; i < photographerMedia.length; i++) {
+    //footer
+    const photographerprice = data.price;
+    // Crée un élément p pour afficher la somme
+    let totalLikes = 0;
+    // Parcourez tous les médias pour calculer la somme des likes
+    for (let i = 0; i < photographerMedia.length; i++) {
      totalLikes += photographerMedia[i].likes;
    }
      // Créez un élément p pour afficher la somme

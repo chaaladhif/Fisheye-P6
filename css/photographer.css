@@ -211,10 +211,10 @@ footer{
   padding: 15px 35px;
   margin: 1em auto;
 }
-.imageLightbox{
+.mediaLightbox{
 width: 100%;
 cursor: pointer;
-height: 35em;
+height: 38em;
 object-fit: cover;
 }
 .column{
@@ -232,9 +232,6 @@ z-index: 1000;}
   display: none;
 }
 
-.cursor {
-  cursor: pointer;
-}
 .next{
   left: 68.5%;;
 
@@ -256,77 +253,6 @@ z-index: 1000;}
   user-select: none;
   -webkit-user-select: none;
 }
-/*.column {
-    padding: 0 8px;
-  }
-  
-  
-  .column {
-    float: left;
-    width: 25%;
-  }*/
-  
- 
-  
-  /* Modal Content 
-  .modal-content {
-    position: relative;
-    background-color: #fefefe;
-    margin: auto;
-    padding: 0;
-    width: 50%;
-    max-width: 1200px;
-  }
-  
-  /* The Close Button 
-  .close {
-    color: white;
-    position: absolute;
-    top: 10px;
-    right: 25px;
-    font-size: 35px;
-    font-weight: bold;
-  }
-  
-  .close:hover,
-  .close:focus {
-    color: #999;
-    text-decoration: none;
-    cursor: pointer;
-  }
-  
- /* img {
-    margin-bottom: -4px;
-  }
-  
-  .caption-container {
-    text-align: center;
-    background-color: black;
-    padding: 2px 16px;
-    color: white;
-  }
-  
-  .demo {
-    opacity: 0.6;
-  }
-  
-  .active,
-  .demo:hover {
-    opacity: 1;
-  }
-  
-  img.hover-shadow {
-    transition: 0.3s;
-    width: 100%;
-  }
-  
-  .hover-shadow:hover {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  }/* fin carousel
-  
- .next-image {
-    right: 20px;
- }*/
  .ptri{
     color: #000;
     font-size: 18px;

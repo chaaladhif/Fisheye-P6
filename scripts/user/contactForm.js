@@ -1,11 +1,11 @@
 const Contactmodal = document.getElementById("contact_modal");
-const body = document.body;
-const main=document.getElementById('main')
+//const body = document.body;
+//const main=document.getElementById('main')
 const modal=document.querySelector('.modal')
 const contactButton=document.querySelector('.contact_button')
-const closeButton=document.querySelector('.close')
+const close=document.querySelector('.close')
 // Func
-const onOpenModal = () => {
+/*const onOpen = () => {
   body.setAttribute('aria-hidden', 'true');
   modal.setAttribute('aria-hidden', 'false');
   body.classList.add('no-scroll');
@@ -16,7 +16,7 @@ const onOpenModal = () => {
   
  }
 
- const onCloseModal = () => {
+ const onClose = () => {
   body.setAttribute('aria-hidden', 'false');
   modal.setAttribute('aria-hidden', 'true');
   body.classList.remove('no-scroll');
@@ -25,13 +25,13 @@ const onOpenModal = () => {
   modal.removeAttribute('tabIndex');
   contactButton.focus();
 
- }
+ }*/
  //fermer en cliquant sur echap
  document.addEventListener('keydown', function (e) {
   const keyCode = e.keyCode ? e.keyCode : e.which
 
   if (modal.getAttribute('aria-hidden') === 'false' && keyCode === 27) {
-    onCloseModal();
+    //onClose();
     closeModal(e)
   }
 });
@@ -39,13 +39,13 @@ contactButton.addEventListener('click', displayModal)
 function displayModal(e) {
   e.preventDefault();
   Contactmodal.style.display = "block";
-  onOpenModal();
+  //onOpen();
 }
-closeButton.addEventListener('click', closeModal)
+close.addEventListener('click', closeModal)
 function closeModal(e) {
   e.preventDefault()
     Contactmodal.style.display = "none";
-    onCloseModal();
+   // onClose();
 }
 const btnSubmit = document.querySelector("#btnSubmit");
 const contactModal=document.getElementById('contact_modal')
