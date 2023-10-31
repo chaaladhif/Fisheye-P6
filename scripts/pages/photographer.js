@@ -52,6 +52,7 @@ pageId();
     // creation de la modale dans le dom
     const lightboxmodal=document.getElementById('lightbox_modal')
     const lightboxModel = getLightboxPhotographer(mediaItem, listPicture);
+    
     const modalContainer = document.getElementById("modal");
     // Ajoutez le conteneur de la lightbox au DOM
     lightboxmodal.appendChild(modalContainer);

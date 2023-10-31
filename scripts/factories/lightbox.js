@@ -27,7 +27,7 @@ async function getLightboxPhotographer (media, listPicture, mediaPath) {
     // Créez un élément img
     const imageElement = document.createElement('img');
     // Ajoutez la source et la classe à l'élément img
-    imageElement.src = `./assets/images/${photographerId}/${image}`;
+    imageElement.src = ``;
     imageElement.classList.add('imageLightbox');
     // Create the title element
     const titleElement = document.createElement("span");
