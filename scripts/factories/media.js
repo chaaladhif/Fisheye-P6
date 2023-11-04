@@ -1,34 +1,18 @@
-const modalightbox = document.getElementById("lightbox_modal");
 const body = document.body;
 // Déclarer une variable pour stocker la position de l'image actuelle
-let currentImageId = null;
 function mediaTemplate(media) {
     const { id, photographerId, title, image, video,  likes, date, price } = media;
-    const onOpenModal = () => {
-        body.setAttribute('aria-hidden', 'true');
-        modalightbox.setAttribute('aria-hidden', 'false');
-        body.classList.add('no-scroll');
-        modalightbox.style.display = 'flex';
-        modalightbox.setAttribute('tabIndex', 0);
-        //closeButton.focus();
-       // nextButton.focus();
-        //prevButton.focus();
-        body.setAttribute('tabIndex', -1);
-        //prevButton.setAttribute('tabindex', 0);
-        //nextButton.setAttribute('tabindex', 0);
-    };
-    function openModal() {
-        modalightbox.style.display = "block";
-        onOpenModal()
-    }  
-    const mediaPath= image ? `./assets/images/${photographerId}/${image}` : `./assets/images/${photographerId}/${video}`; 
+   const mediaPath= image ? `./assets/images/${photographerId}/${image}` : `./assets/images/${photographerId}/${video}`; 
+
+   function openLightBox() {
+    document.getElementById("lightbox_modal").style.display = "block";
+}
     function getMediaCardDOM() {
         const galery = document.querySelector('.galery');
         const figure = document.createElement('figure');
         figure.classList.add('photographer-card');
         figure.setAttribute('role', 'figure');
         figure.setAttribute('aria-label', title);
-        
         if(image)
         {
     const a = document.createElement('a');
@@ -37,7 +21,11 @@ function mediaTemplate(media) {
     img.classList.add('imageGalery');
     img.src = `./assets/images/${photographerId}/${image}`;
     img.alt = `Portrait de ${title}, photographe`;
-    a.addEventListener('click', openModal);
+   //a.addEventListener('click', openModalWithIndex)
+   a.addEventListener('click', () => {
+    //console.log(listPicture);
+    openLightBox(slideIndex);
+});
     a.appendChild(img);
     const divRow = document.createElement('div');
     divRow.classList.add('rowfigure');
@@ -66,9 +54,10 @@ function mediaTemplate(media) {
             const sourceElement = document.createElement('source');
             sourceElement.src = `./assets/images/${photographerId}/${video}`;
             sourceElement.type = 'video/mp4';
-            a.addEventListener('click', openModal)
-            // creation d'une fonction qui pointe sur la modale par l'id et l'ouvrir 
-            
+           // a.addEventListener('click', openModal)
+           a.addEventListener('click', () => {
+            openLightBox(slideIndex);
+        });
             a.appendChild(videoElement)
             videoElement.appendChild(sourceElement);
             const track=document.createElement('track');
@@ -97,7 +86,9 @@ function mediaTemplate(media) {
     }
     galery.appendChild(figure);
     return figure;
-        }
-    return { id, photographerId, title, image, video, mediaPath,  likes, date, price, mediaTemplate, getMediaCardDOM }
-    
+}
+
+// creation d'une fonction qui pointe sur la modale par l'id et l'ouvrir 
+    return { id, photographerId, title, image, video, mediaPath, likes, date, price,mediaTemplate, getMediaCardDOM }
+   
 }

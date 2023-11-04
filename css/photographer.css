@@ -211,7 +211,7 @@ footer{
   padding: 15px 35px;
   margin: 1em auto;
 }
-.mediaLightbox{
+.imageLightbox{
 width: 100%;
 cursor: pointer;
 height: 38em;
@@ -231,7 +231,9 @@ z-index: 1000;}
 .mySlides {
   display: none;
 }
-
+.modal-content{
+    width: 100%;
+}
 .next{
   left: 68.5%;;
 

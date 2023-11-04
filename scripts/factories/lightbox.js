@@ -1,134 +1,104 @@
-async function getLightboxPhotographer (media, listPicture, mediaPath) {
-    const modalightbox = document.getElementById("lightbox_modal");
-   const onCloseModal = () => {
-    body.setAttribute('aria-hidden', 'false');
-    modalightbox.setAttribute('aria-hidden', 'true');
-    body.classList.remove('no-scroll');
-    modalightbox.style.display = 'none';
-    body.removeAttribute('tabIndex');
-    modalightbox.removeAttribute('tabIndex');
-    //closeButton.focus()
-    //prevButton.setAttribute('tabindex', -1);
-    //nextButton.setAttribute('tabindex', -1);
-   }
-    //modal.innerHTML = '';
-    const modalContainer = document.getElementById("modal");
-    // Creer les elements
-    const closeButton = document.createElement("button");
-    closeButton.setAttribute("aria-label", "fermer la modale");
-    closeButton.id = "close";
-    const closeIcon = document.createElement("i");
-    closeIcon.classList.add("fa-solid", "fa-xmark");
-    closeButton.appendChild(closeIcon);
-    const columnDiv = document.createElement("div");
-    columnDiv.classList.add("column");
-    const mediaElement = document.createElement("div");
-    mediaElement.classList.add("mediaLightbox");
-    // Créez un élément img
-    const imageElement = document.createElement('img');
-    // Ajoutez la source et la classe à l'élément img
-    imageElement.src = ``;
-    imageElement.classList.add('imageLightbox');
-    // Create the title element
-    const titleElement = document.createElement("span");
-    titleElement.classList.add("red");
-    titleElement.setAttribute("aria-label", "le titre de media ouverte");
-    titleElement.textContent = media.title;
+
+   function createLightboxModal (listMedia) {
+   
+    const divModal = document.createElement("div");
+    divModal.classList.add("modal-content");
+        // Button close
+        const closeButton = document.createElement("button");
+        closeButton.setAttribute("aria-label", "fermer la modale");
+        closeButton.id = "close";
+        const closeIcon = document.createElement("i");
+        closeIcon.classList.add("fa-solid", "fa-xmark");
+        closeButton.appendChild(closeIcon);
+        closeButton.addEventListener('click', function(){
+            event.preventDefault();
+            closeLightBox();
+        });
+    divModal.appendChild(closeButton);
+    listMedia.forEach(element => {
+        //console.log(element);
+        const mySlide = document.createElement("div");
+        mySlide.setAttribute("class","mySlides"); 
+        // Créez un élément img
+    if (element.url.endsWith(".mp4")){
+        const videoElement = document.createElement('video');
+        videoElement.src = element.url;
+        videoElement.classList.add('imageLightbox');
+        mySlide.appendChild(videoElement);
+    }
+    else 
+    {
+        const imageElement = document.createElement('img');
+        imageElement.src = element.url;
+        imageElement.classList.add('imageLightbox');
+        mySlide.appendChild(imageElement);
+    } 
+     // Create the title element
+     const titleElement = document.createElement("span");
+     titleElement.setAttribute("class", "caption-container red");
+     titleElement.setAttribute("aria-label", "le titre de media ouverte");
+     titleElement.textContent= element.title;
+     mySlide.appendChild(titleElement);
+    divModal.appendChild(mySlide);
+    });
     // Create the previous and next buttons
     const prevButton = document.createElement("a");
     prevButton.classList.add("prev");
     prevButton.setAttribute("aria-label", "le bouton precedent");
     prevButton.innerHTML = "&#10094;";
+    prevButton.addEventListener('click', function(){
+        event.preventDefault();
+        plusSlides(-1);
+    });
     const nextButton = document.createElement("a");
     nextButton.classList.add("next");
     nextButton.setAttribute("aria-label", "le bouton suivant");
     nextButton.innerHTML = "&#10095;";
-    // Append elements to the modal container
-    columnDiv.appendChild(mediaElement);
-    columnDiv.appendChild(imageElement);
-    columnDiv.appendChild(titleElement);
-    columnDiv.appendChild(prevButton);
-    columnDiv.appendChild(nextButton);
-    modalContainer.appendChild(closeButton);
-    modalContainer.appendChild(columnDiv);
-
-
-
+    nextButton.addEventListener('click', function(){
+        event.preventDefault();
+        plusSlides(1);
+    });
     
-   /* if (photographerMedia && photographerMedia.length > 0) {
-        let currentIndex = photographerMedia.findIndex(item => item.id === media.id);
-        const updateMedia = (index) => {
-            const currentMedia = photographerMedia[index];
-             // Supprimer le contenu existant de mediaElement
-    mediaElement.innerHTML = '';
-    if (currentMedia.image) {
-        const img = document.createElement('img');
-        img.src = `assets/images/${photographerId}/${currentMedia.image}`;
-        img.classList.add('mediaLightbox');
-        mediaElement.appendChild(img);
-    } else {
-        const video = document.createElement('video');
-        video.setAttribute('controls', '');
-        const source = document.createElement('source');
-        source.src = `assets/images/${photographerId}/${currentMedia.video}`;
-        source.type = 'video/mp4';
-        video.appendChild(source);
-        video.classList.add('mediaLightbox');
-        mediaElement.appendChild(video);
-    }
-        };*/
-        
-        /*const previous = () => {
-            if (currentIndex > 0) {
-                currentIndex--;
-            } else {
-                currentIndex = photographerMedia.length - 1; // Si on est sur la première, retourne à la dernière
-            }
-            updateMedia(currentIndex);
-        };
-        const next = () => {
-            if (currentIndex < photographerMedia.length - 1) {
-                currentIndex++;
-            } else {
-                currentIndex = 0; // Si on est sur la dernière, retourne à la première; à l'infini
-            }
-            updateMedia(currentIndex);
-        };
-        prevButton.addEventListener('click', previous);
-        nextButton.addEventListener('click', next);
-        updateMedia(currentIndex);  
-    }   */
-/*function openModal() {
-    modal.style.display = "block";
-    onOpenModal()
+    // Append elements to the modal container
+    divModal.appendChild(prevButton);
+    divModal.appendChild(nextButton);
+    return divModal;
 }
-function closeModal() {
-    modal.style.display = "none";
-    onCloseModal()
+function closeLightBox() {
+     document.getElementById("lightbox_modal").style.display = "none";
+}
+/*function openLightBox() {
+    document.getElementById("lightbox_modal").style.display = "block";
 }*/
 
-     //fermer en cliquant sur echap (clavier)
-     document.addEventListener('keydown', function (e) {
-        console.log('next');
+let slideIndex = 1;
 
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+}
+function showSlides(n) {
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  if (n > slides.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = slides.length}
+  for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";
+  }
+  
+  slides[slideIndex-1].style.display = "block";
+}
+
+     //fermer en cliquant sur echap (clavier)
+    document.addEventListener('keydown', function (e) {
         const keyCode = e.keyCode ? e.keyCode : e.which;
-        if (modalightbox.style.display === "flex" && keyCode === 27) {
-            closeModal();
-        } else if (modalightbox.style.display === "flex") {
-       /* if (keyCode === 39 || keyCode === 9) {
-                next();
-        console.log('next');    
+        if ( document.getElementById("lightbox_modal").style.display === "block" && keyCode === 27) {
+            closeLightBox();
+        } else if ( document.getElementById("lightbox_modal").style.display === "block") {
+        if (keyCode === 39) {
+            plusSlides(1);
         } else if (keyCode === 37) {
-                previous();
-            }*/
+            plusSlides(-1);
+            }
         }
         });
-
-
-    //openModal()
-    function closeModal() {
-        modalightbox.style.display = "none";
-        //onCloseModal()
-    }
-    closeButton.addEventListener('click', closeModal)
-}
+       /*|| keyCode === 9)*/ 

@@ -29,7 +29,7 @@ pageId();
  async function PhotographerPage(data, photographerMedia) {
     const galery=document.querySelector('.galery');
     const footer=document.querySelector('footer');
-    let listPicture =[];
+    let listMedia =[];
     // Création du conteneur pour les médias
     const divMediaContainer = document.createElement('div');
     divMediaContainer.classList.add('media-container');
@@ -42,22 +42,24 @@ pageId();
      photographerMedia.forEach(mediaItem => {
      const mediaModel = mediaTemplate(mediaItem);
     const mediaCardDOM = mediaModel.getMediaCardDOM();
-    listPicture.push(mediaModel.mediaPath);
-    //console.log(listPicture);
+    listMedia.push({title:mediaModel.title , url:mediaModel.mediaPath});
     divMediaContainer.appendChild(mediaCardDOM);
     galery.appendChild(divMediaContainer);
-    //modalightbox.appendChild(modalContainer);
     // Ajoutez un gestionnaire d'événements pour chaque image/vidéo
     mediaCardDOM.addEventListener('click', () => { 
-    // creation de la modale dans le dom
-    const lightboxmodal=document.getElementById('lightbox_modal')
-    const lightboxModel = getLightboxPhotographer(mediaItem, listPicture);
     
+    })
+    return {listMedia}
+     });
+     
+     // creation de la modale dans le dom
+    const lightboxModel = createLightboxModal(listMedia);
     const modalContainer = document.getElementById("modal");
     // Ajoutez le conteneur de la lightbox au DOM
-    lightboxmodal.appendChild(modalContainer);
-    })
-     });
+    modalContainer.appendChild(lightboxModel);
+    console.log(slideIndex);
+    showSlides(slideIndex);
+
     //footer
     const photographerprice = data.price;
     // Crée un élément p pour afficher la somme
@@ -76,4 +78,5 @@ pageId();
      price.classList.add('price');
      price.innerHTML = photographerprice + '€ / jour';
      footer.appendChild(price);
+     
 }
