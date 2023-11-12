@@ -28,8 +28,8 @@ async function pageId() {
 pageId();
  async function PhotographerPage(data, photographerMedia) {
     const galery=document.querySelector('.galery');
-    const footer=document.querySelector('footer');
     let listMedia =[];
+    let listLikes=[];
     // Création du conteneur pour les médias
     const divMediaContainer = document.createElement('div');
     divMediaContainer.classList.add('media-container');
@@ -39,44 +39,78 @@ pageId();
     document.getElementById("main").insertBefore(document.querySelector(".photograph-header"), document.querySelector(".galery"));
     // Récupérez les médias spécifiques au photographe actuel
      // Créez la structure pour les médias
+
+     let totalLikes=0;
      photographerMedia.forEach(mediaItem => {
      const mediaModel = mediaTemplate(mediaItem);
-    const mediaCardDOM = mediaModel.getMediaCardDOM();
-    listMedia.push({title:mediaModel.title , url:mediaModel.mediaPath});
+     totalLikes += mediaModel.likes;
+     const mediaCardDOM = mediaModel.getMediaCardDOM(listMedia, listLikes);
+    // Pass the index of the current media card in the list
+    listMedia.push({title:mediaModel.title, url:mediaModel.mediaPath, date:mediaModel.date, likes:mediaModel.likes});
+    //listLikes.push(mediaModel.likes);
     divMediaContainer.appendChild(mediaCardDOM);
     galery.appendChild(divMediaContainer);
-    // Ajoutez un gestionnaire d'événements pour chaque image/vidéo
-    mediaCardDOM.addEventListener('click', () => { 
-    
-    })
-    return {listMedia}
+    return {listMedia, listLikes};
      });
-     
+     //showSlides(slideIndex);
      // creation de la modale dans le dom
     const lightboxModel = createLightboxModal(listMedia);
     const modalContainer = document.getElementById("modal");
-    // Ajoutez le conteneur de la lightbox au DOM
     modalContainer.appendChild(lightboxModel);
-    console.log(slideIndex);
-    showSlides(slideIndex);
-
-    //footer
-    const photographerprice = data.price;
-    // Crée un élément p pour afficher la somme
-    let totalLikes = 0;
-    // Parcourez tous les médias pour calculer la somme des likes
-    for (let i = 0; i < photographerMedia.length; i++) {
-     totalLikes += photographerMedia[i].likes;
-   }
-     // Créez un élément p pour afficher la somme
+    //price et total likes en bas de page
+    const footer = document.querySelector('footer');
      const somme = document.createElement('p');
      somme.classList.add("somme");
-     somme.innerHTML = `${totalLikes} <i class="fa-solid fa-heart size"></i>`;
      footer.appendChild(somme);
-     // Crée un élément p pour afficher le prix
-     const price = document.createElement('p');
-     price.classList.add('price');
-     price.innerHTML = photographerprice + '€ / jour';
-     footer.appendChild(price);
-     
+     updateTotal(totalLikes);
+     const footerModel = photographerModel.getFooterPrice(); // Récupérez l'élément contenant le prix
+    footer.appendChild(footerModel); // Ajoutez l'élément du prix au footer
 }
+function updateTotal(total){
+    document.querySelector(".somme").textContent = total;
+
+    
+}
+/*    document.querySelector(".somme").innerHTML = total+' <i class="fas fa-heart size"></i>';*/
+
+//value sera +1 ou -1 à passer via media 
+
+function likesAndDislikes(value){
+    let sommeElement = document.querySelector('.somme');
+    let currentTotal = parseInt(sommeElement.textContent);
+    let newTotal = currentTotal + value;
+    updateTotal(newTotal);
+    console.log(currentTotal);
+    const likeNumber=document.querySelector('.likeNumber');
+const heart=document.querySelector('.heart');
+heart.addEventListener('click', function() {
+        console.log('ok');
+    });
+// recuperer la valeur somme du dom 
+// convertir la chaine en entier (parsint)
+// ajouter un plus un ou moins un 
+//update Total 
+}
+/* let isLiked = false; // Variable pour suivre l'état du like
+            heartIcon.addEventListener('click', function(event) {
+                event.stopPropagation(); // Arrête la propagation de l'événement pour éviter les interactions non voulues
+                if (isLiked) {
+                    likes-1; // Diminue le nombre de likes
+                } else {
+                    likes+1; // Augmente le nombre de likes
+                }
+                isLiked = !isLiked; // Inverse l'état du like
+                //likesSpan.textContent = likes; // Met à jour l'affichage du nombre de likes
+        });
+         let isLiked = false; // Variable pour suivre l'état du like
+    heartIcon.addEventListener('click', function(event) {
+        event.stopPropagation(); // Arrête la propagation de l'événement pour éviter les interactions non voulues
+        if (isLiked) {
+            likesSpan.textContent = likes;
+            //updateTotalLikes(-1) // Diminue le nombre de likes
+        } else {
+            likesSpan.textContent = likes+1;
+           // updateTotalLikes(+1) // Augmente le nombre de likes
+        }
+        isLiked = !isLiked; // Inverse l'état du like
+        */

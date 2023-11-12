@@ -82,7 +82,16 @@ function photographerTemplate(data) {
     photographHeader.appendChild(photographerImage); 
     return photographHeader;
     }
-    return { name, picture,  city, country, tagline, price, getUserCardDOM,getHeaderPhotographer }
+    //footer
+    function getFooterPrice(){
+        const priceElement = document.createElement('p');
+        priceElement.classList.add('price');
+        priceElement.innerHTML = `${price}€ / jour`;
+        // Retournez l'élément priceElement pour pouvoir l'utiliser ailleurs si nécessaire
+        return priceElement;
+    }
+    
+    return { name, picture,  city, country, tagline, price, getUserCardDOM,getHeaderPhotographer, getFooterPrice }
 }
 
 

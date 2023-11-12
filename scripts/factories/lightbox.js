@@ -15,23 +15,24 @@
             closeLightBox();
         });
     divModal.appendChild(closeButton);
-    listMedia.forEach(element => {
-        //console.log(element);
+    listMedia.forEach((element) => {
         const mySlide = document.createElement("div");
         mySlide.setAttribute("class","mySlides"); 
-        // Créez un élément img
+        // Créez un élément video
     if (element.url.endsWith(".mp4")){
         const videoElement = document.createElement('video');
         videoElement.src = element.url;
         videoElement.classList.add('imageLightbox');
+        videoElement.alt = `Portrait de ${element.title}, photographe`;
         mySlide.appendChild(videoElement);
     }
     else 
-    {
+    { // Créez un élément img
         const imageElement = document.createElement('img');
-        imageElement.src = element.url;
-        imageElement.classList.add('imageLightbox');
-        mySlide.appendChild(imageElement);
+            imageElement.src = element.url;
+            imageElement.alt = `Portrait de ${element.title}, photographe`;
+            imageElement.classList.add('imageLightbox');
+            mySlide.appendChild(imageElement);
     } 
      // Create the title element
      const titleElement = document.createElement("span");
@@ -44,7 +45,7 @@
     // Create the previous and next buttons
     const prevButton = document.createElement("a");
     prevButton.classList.add("prev");
-    prevButton.setAttribute("aria-label", "le bouton precedent");
+    prevButton.setAttribute("aria-label", "le bouton précedent");
     prevButton.innerHTML = "&#10094;";
     prevButton.addEventListener('click', function(){
         event.preventDefault();
@@ -64,41 +65,61 @@
     divModal.appendChild(nextButton);
     return divModal;
 }
+let slideIndex=0;
+
+function findIndexMedia(urlToSearch) {
+    let currentIndex=0;
+    let listSlides = document.querySelectorAll(".imageLightbox");
+    for (let index = 0; index < listSlides.length; index++) {
+        const element = listSlides[index];
+        if( element.src == urlToSearch ){
+            currentIndex=index;
+        }    
+    }
+    openLightBox();   
+    showSlides(currentIndex);
+}
+
 function closeLightBox() {
      document.getElementById("lightbox_modal").style.display = "none";
 }
-/*function openLightBox() {
+function openLightBox() {
     document.getElementById("lightbox_modal").style.display = "block";
-}*/
-
-let slideIndex = 1;
-
+}
 function plusSlides(n) {
   showSlides(slideIndex += n);
 }
 function showSlides(n) {
-  var i;
-  var slides = document.getElementsByClassName("mySlides");
-  if (n > slides.length) {slideIndex = 1}
-  if (n < 1) {slideIndex = slides.length}
-  for (i = 0; i < slides.length; i++) {
-      slides[i].style.display = "none";
+    var slides = document.getElementsByClassName("mySlides");
+    //console.log("n:", n , " slideIndex:", slideIndex);
+   if (n > slides.length-1) 
+   {
+    slideIndex = 0;
+    }
+    else{
+   if (n < 0) {
+    slideIndex = slides.length-1;
+    }
+   else{
+    slideIndex=n;
+   }
+    }
+    for (let i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+    }    
+    slides[slideIndex].style.display = "block";
   }
-  
-  slides[slideIndex-1].style.display = "block";
-}
-
      //fermer en cliquant sur echap (clavier)
     document.addEventListener('keydown', function (e) {
         const keyCode = e.keyCode ? e.keyCode : e.which;
         if ( document.getElementById("lightbox_modal").style.display === "block" && keyCode === 27) {
             closeLightBox();
         } else if ( document.getElementById("lightbox_modal").style.display === "block") {
-        if (keyCode === 39) {
+        if (keyCode === 39|| keyCode === 9) {
             plusSlides(1);
-        } else if (keyCode === 37) {
+        } else if (keyCode === 37 || keyCode === 7) {
             plusSlides(-1);
             }
         }
         });
-       /*|| keyCode === 9)*/ 
+    

@@ -1,13 +1,12 @@
-const body = document.body;
+//const body = document.body;
 // Déclarer une variable pour stocker la position de l'image actuelle
 function mediaTemplate(media) {
-    const { id, photographerId, title, image, video,  likes, date, price } = media;
+    
+    const { id, photographerId, title, image, video, likes, date } = media;
    const mediaPath= image ? `./assets/images/${photographerId}/${image}` : `./assets/images/${photographerId}/${video}`; 
 
-   function openLightBox() {
-    document.getElementById("lightbox_modal").style.display = "block";
-}
     function getMediaCardDOM() {
+        
         const galery = document.querySelector('.galery');
         const figure = document.createElement('figure');
         figure.classList.add('photographer-card');
@@ -17,15 +16,15 @@ function mediaTemplate(media) {
         {
     const a = document.createElement('a');
     a.href = '#';
+    a.setAttribute('aria-label', `Voir ${title}`);
     const img = document.createElement('img');
     img.classList.add('imageGalery');
     img.src = `./assets/images/${photographerId}/${image}`;
     img.alt = `Portrait de ${title}, photographe`;
-   //a.addEventListener('click', openModalWithIndex)
-   a.addEventListener('click', () => {
-    //console.log(listPicture);
-    openLightBox(slideIndex);
-});
+    //il manque ici d'appeler showslides avec la position courante
+    a.addEventListener('click', () => {
+       findIndexMedia(img.src);
+    });
     a.appendChild(img);
     const divRow = document.createElement('div');
     divRow.classList.add('rowfigure');
@@ -35,8 +34,13 @@ function mediaTemplate(media) {
     likesContainer.classList.add('likes');
     const likesSpan = document.createElement('span');
     likesSpan.textContent = likes;
+    likesSpan.setAttribute('class', 'likeNumber');
     const heartIcon = document.createElement('span');
+    heartIcon.setAttribute('class', 'heart');
     heartIcon.innerHTML = '<i class="fa-solid fa-heart size"></i>';
+    /*heartIcon.addEventListener('click', () => {
+        likesAndDislikes(id, likesSpan);
+    });*/
     likesContainer.appendChild(likesSpan);
     likesContainer.appendChild(heartIcon);
     divRow.appendChild(h2);
@@ -48,15 +52,15 @@ function mediaTemplate(media) {
         {
             const a = document.createElement('a');
             a.href = '#';
+            a.setAttribute('aria-label', `Voir ${title}`);
             const videoElement = document.createElement('video');
             videoElement.classList.add('videoGalery');
             videoElement.controls = true;
             const sourceElement = document.createElement('source');
             sourceElement.src = `./assets/images/${photographerId}/${video}`;
             sourceElement.type = 'video/mp4';
-           // a.addEventListener('click', openModal)
-           a.addEventListener('click', () => {
-            openLightBox(slideIndex);
+            a.addEventListener('click', () => {
+            findIndexMedia(sourceElement.src);
         });
             a.appendChild(videoElement)
             videoElement.appendChild(sourceElement);
@@ -74,8 +78,13 @@ function mediaTemplate(media) {
             likesContainer.classList.add('likes');
             const likesSpan = document.createElement('span');
             likesSpan.textContent = likes;
+            likesSpan.setAttribute('class', 'likeNumber');
             const heartIcon = document.createElement('span');
+            heartIcon.setAttribute('class', 'heart');
             heartIcon.innerHTML = '<i class="fa-solid fa-heart size"></i>';
+            /*heartIcon.addEventListener('click', () => {
+                likesAndDislikes(id, likesSpan);
+            });  */
             likesContainer.appendChild(likesSpan);
             likesContainer.appendChild(heartIcon);
             divRow.appendChild(h2);
@@ -83,12 +92,13 @@ function mediaTemplate(media) {
             divRow.appendChild(likesContainer);
             figure.appendChild(videoElement);
             figure.appendChild(divRow);
-    }
+}
     galery.appendChild(figure);
     return figure;
 }
 
+
 // creation d'une fonction qui pointe sur la modale par l'id et l'ouvrir 
-    return { id, photographerId, title, image, video, mediaPath, likes, date, price,mediaTemplate, getMediaCardDOM }
+    return { id, photographerId, title, image, video, mediaPath, likes, date,mediaTemplate, getMediaCardDOM }
    
 }
