@@ -1,56 +1,51 @@
-const tri = (listMedia) => {
-     // Récupérer l'élément select
-     const selectElement = document.getElementById('select1');
-     // Écouter l'événement de changement du select
-     selectElement.addEventListener('change', () => {
-         const selectedValue = selectElement.value;
-         if (selectedValue === 'popularite') {
-             // Trier par popularité (likes)
-             console.log('popu');
-             listMedia.sort((a, b) => b.likes - a.likes);
-         } else if (selectedValue === 'date') {
-             // Trier par date
-             listMedia.sort((a, b) => new Date(a.date) - new Date(b.date));
-         } else if (selectedValue === 'titre') {
-             // Trier par titre
-             listMedia.sort((a, b) => a.title.localeCompare(b.title));
-         }
-     });
- 
-  }
-  tri()
+function tri(listMedia) {
+    const ptri = document.createElement('label')
+    ptri.classList.add('ptri')
+    ptri.textContent = 'Trier par';
+    ptri.setAttribute('for', 'select1');
 
+    const selectContainer = document.createElement('div');
+    selectContainer.classList.add('select-container');
+    const select1 = document.createElement('select');
+    select1.id = 'select1';
+    const option1 = document.createElement('option');
+    option1.value = 'popularite';
+    option1.textContent = 'Popularité';
+    
+    const option2 = document.createElement('option');
+    option2.value = 'Date';
+    option2.textContent = 'Date';
+    
+    const option3 = document.createElement('option');
+    option3.value = 'Titre';
+    option3.textContent = 'Titre';
+
+    // Ajoutez les options à l'élément select
+    select1.appendChild(option1);
+    select1.appendChild(option2);
+    select1.appendChild(option3);
+
+    // Écoutez l'événement change sur l'élément select
+    select1.addEventListener('change', () => {
+        const selectedValue = select1.value;
+
+        // Ajoutez ici la logique de tri en fonction de la valeur sélectionnée
+        if (selectedValue === 'popularite') {
+            ///////console.log( listMedia.sort((a, b) => b.likes - a.likes));
+            //ordre decroissant de likes
+            listMedia.sort((a, b) => b.likes - a.likes);
+        } else if (selectedValue === 'Date') {
+            //ordre croissant pour la date
+            ////////////console.log( listMedia.sort((a, b) => new Date(a.date) - new Date(b.date)));
+            listMedia.sort((a, b) => new Date(a.date) - new Date(b.date));
+        } else if (selectedValue === 'Titre') {
+            //ordre alphabetique de a à z
+           /////////////////// console.log(listMedia.sort((a, b) => a.title.localeCompare(b.title)));
+            listMedia.sort((a, b) => a.title.localeCompare(b.title));
+        }
+       // updateGallery(listMedia);
+    });
+    selectContainer.appendChild(select1);
+    return { ptri, selectContainer };
+}
   
-    /* const triContainer = document.querySelector('.triContainer');
- const ptri=document.createElement('p')
- ptri.classList.add('ptri')
- ptri.textContent='trier par'
- triContainer.appendChild(ptri)
- // Création du premier select
- const selectContainer = document.createElement('div');
- selectContainer.classList.add('select-container');
- const select1 = document.createElement('select');
- select1.id = 'select1'
- const option1 = document.createElement('option');
- option1.value = 'option1';
- option1.textContent = 'Popularité ';
- select1.appendChild(option1)
- //option 2
- const option2 = document.createElement('option');
- option2.value = 'option2';
- option2.textContent = 'Date ';
- select1.appendChild(option2);
- // option3
- const option3 = document.createElement('option');
- option3.value = 'option3';
- option3.textContent = 'Titre ';
- select1.appendChild(option3)
-/*const option= document.createElement('option')
-option.classList.add('option')
-option.innerHTML = '────────';
-select1.appendChild(option)
- const hrElement = document.createElement('hr');
- select1.appendChild(hrElement)
- selectContainer.appendChild(select1);
- // Ajout des conteneurs de selects dans le div de tri
- triContainer.appendChild(selectContainer);*/

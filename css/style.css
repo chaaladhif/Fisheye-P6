@@ -95,12 +95,25 @@ h1 {
     margin-bottom: 0;
     margin-top: 0;
 }
-.red:hover{
+/*.red:hover{
     color: var(--secondary-color);
-}
+}*/
 .likes{
-    color: var(--primary-color);
+  
     display: flex;
     gap: 0.5em;
     cursor: pointer;
+}
+.primary{
+    color: var(--primary-color);
+}
+.secondary{
+    color: var(--secondary-color);
+}
+.heartDiv{
+    display: flex;
+    align-items: center;
+}
+.somme{
+    padding-right: 0.3em;
 }

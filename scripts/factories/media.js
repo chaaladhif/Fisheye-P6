@@ -1,12 +1,11 @@
 //const body = document.body;
 // Déclarer une variable pour stocker la position de l'image actuelle
 function mediaTemplate(media) {
-    
+    let isLiked=false;
     const { id, photographerId, title, image, video, likes, date } = media;
    const mediaPath= image ? `./assets/images/${photographerId}/${image}` : `./assets/images/${photographerId}/${video}`; 
 
     function getMediaCardDOM() {
-        
         const galery = document.querySelector('.galery');
         const figure = document.createElement('figure');
         figure.classList.add('photographer-card');
@@ -21,7 +20,6 @@ function mediaTemplate(media) {
     img.classList.add('imageGalery');
     img.src = `./assets/images/${photographerId}/${image}`;
     img.alt = `Portrait de ${title}, photographe`;
-    //il manque ici d'appeler showslides avec la position courante
     a.addEventListener('click', () => {
        findIndexMedia(img.src);
     });
@@ -32,15 +30,29 @@ function mediaTemplate(media) {
     h2.textContent = title;
     const likesContainer = document.createElement('div');
     likesContainer.classList.add('likes');
+    likesContainer.classList.add('primary');
     const likesSpan = document.createElement('span');
     likesSpan.textContent = likes;
     likesSpan.setAttribute('class', 'likeNumber');
     const heartIcon = document.createElement('span');
     heartIcon.setAttribute('class', 'heart');
     heartIcon.innerHTML = '<i class="fa-solid fa-heart size"></i>';
-    /*heartIcon.addEventListener('click', () => {
-        likesAndDislikes(id, likesSpan);
-    });*/
+    heartIcon.addEventListener('click', () => {
+        if (!isLiked) {
+            likesSpan.textContent=likes+1;
+            likesAndDislikes(1, likesSpan);
+            likesContainer.classList.remove('primary');
+            likesContainer.classList.add('secondary');
+
+        } else {
+            likesSpan.textContent=likes;
+            likesAndDislikes(-1, likesSpan);
+            likesContainer.classList.remove('secondary');
+            likesContainer.classList.add('primary');
+        }
+        // Toggle the liked status
+        isLiked = !isLiked;
+        });
     likesContainer.appendChild(likesSpan);
     likesContainer.appendChild(heartIcon);
     divRow.appendChild(h2);
@@ -76,15 +88,29 @@ function mediaTemplate(media) {
             h2.textContent = title;
             const likesContainer = document.createElement('div');
             likesContainer.classList.add('likes');
+            likesContainer.classList.add('primary');
             const likesSpan = document.createElement('span');
             likesSpan.textContent = likes;
             likesSpan.setAttribute('class', 'likeNumber');
             const heartIcon = document.createElement('span');
             heartIcon.setAttribute('class', 'heart');
             heartIcon.innerHTML = '<i class="fa-solid fa-heart size"></i>';
-            /*heartIcon.addEventListener('click', () => {
-                likesAndDislikes(id, likesSpan);
-            });  */
+            heartIcon.addEventListener('click', () => {
+                if (!isLiked) {
+                    likesSpan.textContent=likes+1;
+                    likesAndDislikes(1, likesSpan);
+                    likesContainer.classList.remove('primary');
+                    likesContainer.classList.add('secondary');
+        
+                } else {
+                    likesSpan.textContent=likes;
+                    likesAndDislikes(-1, likesSpan);
+                    likesContainer.classList.remove('secondary');
+                    likesContainer.classList.add('primary');
+                }
+                // Toggle the liked status
+                isLiked = !isLiked;
+                });
             likesContainer.appendChild(likesSpan);
             likesContainer.appendChild(heartIcon);
             divRow.appendChild(h2);
@@ -96,9 +122,6 @@ function mediaTemplate(media) {
     galery.appendChild(figure);
     return figure;
 }
-
-
-// creation d'une fonction qui pointe sur la modale par l'id et l'ouvrir 
     return { id, photographerId, title, image, video, mediaPath, likes, date,mediaTemplate, getMediaCardDOM }
    
 }

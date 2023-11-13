@@ -66,7 +66,6 @@
     return divModal;
 }
 let slideIndex=0;
-
 function findIndexMedia(urlToSearch) {
     let currentIndex=0;
     let listSlides = document.querySelectorAll(".imageLightbox");

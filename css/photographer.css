@@ -259,10 +259,11 @@ z-index: 1000;}
     color: #000;
     font-size: 18px;
     font-weight: 600;
-    margin: 0;
+    margin-left: 0.6em;
  }
  .triContainer{
 display: flex;
+align-items: center;
 gap: 1em;
  }
  .select-container{
