@@ -3,26 +3,8 @@ const body = document.body;
 const main=document.getElementById('main')
 const modal=document.querySelector('.modal')
 const contactButton=document.querySelector('.contact_button')
-const close=document.querySelector('.close')
-// keyboard
-/*const onOpen = () => {
-  body.setAttribute('aria-hidden', 'true');
-  modal.setAttribute('aria-hidden', 'false');
-  body.classList.add('no-scroll');
-  modal.style.display = 'flex';
-  modal.setAttribute('tabIndex', 2);
-  close.focus();
-  body.setAttribute('tabIndex', 1);
- }
- const onClose = () => {
-  body.setAttribute('aria-hidden', 'false');
-  modal.setAttribute('aria-hidden', 'true');
-  body.classList.remove('no-scroll');
-  modal.style.display = 'none';
-  body.removeAttribute('tabIndex');
-  modal.removeAttribute('tabIndex');
-  contactButton.focus();
- }*/
+const closed=document.querySelector('.close')
+
  //fermer en cliquant sur echap
  document.addEventListener('keydown', function (e) {
   const keyCode = e.keyCode ? e.keyCode : e.which
@@ -34,20 +16,22 @@ const close=document.querySelector('.close')
 contactButton.addEventListener('click', displayModal)
 function displayModal(e) {
   e.preventDefault();
-  contactModal.style.display = "block";
+  Contactmodal.style.display = "block";
   body.setAttribute('aria-hidden', 'true');
-  contactModal.setAttribute('aria-hidden', 'false');
+  Contactmodal.setAttribute('aria-hidden', 'false');
+  body.classList.add('no-scroll');
+  closed.setAttribute('tabIndex', 1);
   body.setAttribute('tabIndex', -1);
-  contactModal.setAttribute('tabIndex', 1);
-  close.focus();
+  Contactmodal.setAttribute('tabIndex', 1);
+  closed.focus();
 }
-close.addEventListener('click', closeModal)
+closed.addEventListener('click', closeModal)
 function closeModal(e) {
   e.preventDefault();
-  contactModal.style.display = "none";
-  body.classList.add('no-scroll');
+  Contactmodal.style.display = "none";
+  body.classList.remove('no-scroll');
   body.removeAttribute('tabIndex');
-  contactModal.removeAttribute('tabIndex');
+  Contactmodal.removeAttribute('tabIndex');
   contactButton.focus();
 }
 const btnSubmit = document.querySelector("#btnSubmit");

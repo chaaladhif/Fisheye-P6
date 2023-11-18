@@ -7,16 +7,12 @@ const LightboxModal=document.querySelector('#lightbox_modal');
         const closeButton = document.createElement("button");
         closeButton.setAttribute("aria-label", "fermer la modale");
         closeButton.id = "close";
-        closeButton.setAttribute("tabindex", "2"); 
         const closeIcon = document.createElement("i");
         closeIcon.classList.add("fa-solid", "fa-xmark");
         closeButton.appendChild(closeIcon);
         closeButton.addEventListener('click', function(){
             event.preventDefault();
             closeLightBox();
-            body.classList.remove('no-scroll'); 
-            body.removeAttribute('tabIndex');
-            LightboxModal.removeAttribute('tabIndex');
         });
     divModal.appendChild(closeButton);
     listMedia.forEach((element) => {
@@ -27,7 +23,7 @@ const LightboxModal=document.querySelector('#lightbox_modal');
         const videoElement = document.createElement('video');
         videoElement.controls = true;
         const sourceElement = document.createElement('source');
-        sourceElement.type = 'video/mp4';
+        //sourceElement.type = 'video/mp4';
         sourceElement.src = element.mediaPath;
         videoElement.classList.add('imageLightbox');
         videoElement.alt = `Portrait de ${element.title}, photographe`;
@@ -54,7 +50,6 @@ const LightboxModal=document.querySelector('#lightbox_modal');
     const prevButton = document.createElement("a");
     prevButton.classList.add("prev");
     prevButton.setAttribute("aria-label", "le bouton précedent");
-    prevButton.setAttribute("tabindex", "2"); 
     prevButton.innerHTML = "&#10094;";
     prevButton.addEventListener('click', function(){
         event.preventDefault();
@@ -63,7 +58,6 @@ const LightboxModal=document.querySelector('#lightbox_modal');
     const nextButton = document.createElement("a");
     nextButton.classList.add("next");
     nextButton.setAttribute("aria-label", "le bouton suivant");
-    prevButton.setAttribute("tabindex", "2"); 
     nextButton.innerHTML = "&#10095;";
     nextButton.addEventListener('click', function(){
         event.preventDefault();
@@ -88,10 +82,7 @@ function findIndexMedia(urlToSearch) {
         }    
     }
     openLightBox();
-    body.setAttribute("tabindex", "-1"); 
-    body.classList.add('no-scroll'); 
-    closeButton.focus(); 
-    LightboxModal.setAttribute('tabIndex', '2');
+    //closeButton.focus(); 
     showSlides(currentIndex);
 }
 

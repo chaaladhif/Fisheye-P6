@@ -12,17 +12,18 @@ function mediaTemplate(media) {
         figure.setAttribute('aria-label', title);
         if(image)
         {
-    const a = document.createElement('a');
+    /*const a = document.createElement('a');
     a.href = '#';
-    a.setAttribute('aria-label', `Voir ${title}`);
+    a.setAttribute('aria-label', `Voir ${title}`);*/
     const img = document.createElement('img');
     img.classList.add('imageGalery');
     img.src = `./assets/images/${photographerId}/${image}`;
     img.alt = `Portrait de ${title}, photographe`;
-    a.addEventListener('click', () => {
+    img.addEventListener('click', () => {
        findIndexMedia(img.src);
+
     });
-    a.appendChild(img);
+   // a.appendChild(img);
     const divRow = document.createElement('div');
     divRow.classList.add('rowfigure');
     const h2 = document.createElement('h2');
@@ -56,24 +57,27 @@ function mediaTemplate(media) {
     likesContainer.appendChild(heartIcon);
     divRow.appendChild(h2);
     divRow.appendChild(likesContainer);
-    figure.appendChild(a);
+    figure.appendChild(img);
     figure.appendChild(divRow);
         }
         if(video)
         {
-            const a = document.createElement('a');
+            /*const a = document.createElement('a');
             a.href = '#';
-            a.setAttribute('aria-label', `Voir ${title}`);
+            a.setAttribute('aria-label', `Voir ${title}`);*/
             const videoElement = document.createElement('video');
             videoElement.classList.add('videoGalery');
             videoElement.controls = true;
             const sourceElement = document.createElement('source');
             sourceElement.src = `./assets/images/${photographerId}/${video}`;
             sourceElement.type = 'video/mp4';
-            a.addEventListener('click', () => {
+            videoElement.addEventListener('click', (e) => {
+                e.preventDefault();
             findIndexMedia(sourceElement.src);
+                        console.log(sourceElement.src);
+
         });
-            a.appendChild(videoElement)
+           // a.appendChild(videoElement)
             videoElement.appendChild(sourceElement);
             const track=document.createElement('track');
             track.kind="subtitles";
@@ -113,7 +117,7 @@ function mediaTemplate(media) {
             likesContainer.appendChild(likesSpan);
             likesContainer.appendChild(heartIcon);
             divRow.appendChild(h2);
-            figure.appendChild(a);
+            figure.appendChild(videoElement);
             divRow.appendChild(likesContainer);
             figure.appendChild(videoElement);
             figure.appendChild(divRow);
