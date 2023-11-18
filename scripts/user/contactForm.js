@@ -1,21 +1,19 @@
 const Contactmodal = document.getElementById("contact_modal");
-//const body = document.body;
-//const main=document.getElementById('main')
+const body = document.body;
+const main=document.getElementById('main')
 const modal=document.querySelector('.modal')
 const contactButton=document.querySelector('.contact_button')
 const close=document.querySelector('.close')
-// Func
+// keyboard
 /*const onOpen = () => {
   body.setAttribute('aria-hidden', 'true');
   modal.setAttribute('aria-hidden', 'false');
   body.classList.add('no-scroll');
   modal.style.display = 'flex';
   modal.setAttribute('tabIndex', 2);
-  closeButton.focus();
+  close.focus();
   body.setAttribute('tabIndex', 1);
-  
  }
-
  const onClose = () => {
   body.setAttribute('aria-hidden', 'false');
   modal.setAttribute('aria-hidden', 'true');
@@ -24,28 +22,33 @@ const close=document.querySelector('.close')
   body.removeAttribute('tabIndex');
   modal.removeAttribute('tabIndex');
   contactButton.focus();
-
  }*/
  //fermer en cliquant sur echap
  document.addEventListener('keydown', function (e) {
   const keyCode = e.keyCode ? e.keyCode : e.which
 
   if (modal.getAttribute('aria-hidden') === 'false' && keyCode === 27) {
-    //onClose();
     closeModal(e)
   }
 });
 contactButton.addEventListener('click', displayModal)
 function displayModal(e) {
   e.preventDefault();
-  Contactmodal.style.display = "block";
-  //onOpen();
+  contactModal.style.display = "block";
+  body.setAttribute('aria-hidden', 'true');
+  contactModal.setAttribute('aria-hidden', 'false');
+  body.setAttribute('tabIndex', -1);
+  contactModal.setAttribute('tabIndex', 1);
+  close.focus();
 }
 close.addEventListener('click', closeModal)
 function closeModal(e) {
-  e.preventDefault()
-    Contactmodal.style.display = "none";
-   // onClose();
+  e.preventDefault();
+  contactModal.style.display = "none";
+  body.classList.add('no-scroll');
+  body.removeAttribute('tabIndex');
+  contactModal.removeAttribute('tabIndex');
+  contactButton.focus();
 }
 const btnSubmit = document.querySelector("#btnSubmit");
 const contactModal=document.getElementById('contact_modal')
@@ -148,10 +151,9 @@ function validate(e) {
     isLastNameValid &&
     isEmailValid &&
     isMessage) {
-   console.log(firstname.value, lastname.value, email.value, message.value)
-   closeModal(e)
+      console.log('le prénom c\'est:', firstname.value, 'le nom c\'est:', lastname.value, 'Email c\'est:', email.value, 'le message est:', message.value);   closeModal(e);
   }
   else {
-    displayModal(e) 
+    displayModal(e) ;
   }
 }

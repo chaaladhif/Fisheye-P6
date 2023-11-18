@@ -26,9 +26,10 @@ async function pageId() {
         console.error(error);
     }
 }
+const galery=document.querySelector('.galery');
+
 pageId();
  async function PhotographerPage(data, photographerMedia) {
-    const galery=document.querySelector('.galery');
     let listMedia =[];
     // Création du conteneur pour les médias
     const divMediaContainer = document.createElement('div');
@@ -37,42 +38,32 @@ pageId();
     const header =  photographerModel.getHeaderPhotographer();
     document.getElementById("main").appendChild(header);
     document.getElementById("main").insertBefore(document.querySelector(".photograph-header"), document.querySelector(".galery"));
+   
+    
     // Récupérez les médias spécifiques au photographe actuel
      // Créez la structure pour les médias
      let totalLikes=0;
      photographerMedia.forEach(mediaItem => {
      const mediaModel = mediaTemplate(mediaItem);
      totalLikes += mediaModel.likes;
-     const mediaCardDOM = mediaModel.getMediaCardDOM(listMedia);
-    // Pass the index of the current media card in the list
-    listMedia.push({title:mediaModel.title, url:mediaModel.mediaPath, date:mediaModel.date, likes:mediaModel.likes});
+     const mediaCardDOM = mediaModel.getMediaCardDOM();    // Pass the index of the current media card in the list
+    //listMedia.push({photographerId: mediaModel.photographerId,title:mediaModel.title, image: mediaModel.image, video: mediaModel.video, url:mediaModel.mediaPath, date:mediaModel.date, likes:mediaModel.likes});
+    listMedia.push(mediaModel);
     divMediaContainer.appendChild(mediaCardDOM);
-    galery.appendChild(divMediaContainer);
-    return {listMedia};
      });
-     function updateGallery(sortedList) {
-        // Effacez le contenu actuel de la galerie
-        //galery.innerHTML = '';
-        // Ajoutez les éléments triés à la galerie
-        sortedList.forEach(media => {
-            const mediaModel = mediaTemplate(media);
-            const mediaCardDOM = mediaModel.getMediaCardDOM();
-            galery.appendChild(mediaCardDOM);
-            
-        });
-    }
+     galery.appendChild(divMediaContainer);
+
+     const TriModel=tri(listMedia);
+     const triContainer = document.querySelector('.triContainer');
+     // Ajoutez les éléments tri au triContainer
+     triContainer.appendChild(TriModel.ptri);
+     triContainer.appendChild(TriModel.selectContainer);
+     
      // creation de la modale dans le dom
     const lightboxModel = createLightboxModal(listMedia);
     const modalContainer = document.getElementById("modal");
     // Ajoutez le conteneur de la lightbox au DOM
     modalContainer.appendChild(lightboxModel);
-    //creation de tri dans le DOM
-    const TriModel=tri(listMedia);
-    const triContainer = document.querySelector('.triContainer');
-    // Ajoutez les éléments tri au triContainer
-    triContainer.appendChild(TriModel.ptri);
-    triContainer.appendChild(TriModel.selectContainer);
-    updateGallery(listMedia)
     //price et total likes en bas de page
     const footer = document.querySelector('footer');
      // Créez un élément p pour afficher la somme
@@ -87,6 +78,17 @@ pageId();
      const footerModel = photographerModel.getFooterPrice(); // Récupérez l'élément contenant le prix
     footer.appendChild(footerModel); // Ajoutez l'élément du prix au footer
     }
+    function updateGallery(sortedList) {
+        const divMediaContainer=document.querySelector('.media-container');
+         divMediaContainer.innerHTML = '';
+        //console.log(sortedList); // Iterate through the sorted list and create media cards
+         sortedList.forEach(mediaItem => {
+        
+             const mediaModel = mediaTemplate(mediaItem);
+             const mediaCardDOM = mediaModel.getMediaCardDOM();
+             divMediaContainer.appendChild(mediaCardDOM);
+         });
+     }
     function updateTotal(total){
     document.querySelector(".somme").textContent = total;
     }
@@ -97,3 +99,4 @@ pageId();
     updateTotal(newTotal);
     return newTotal;
     }
+    

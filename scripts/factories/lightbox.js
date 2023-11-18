@@ -1,40 +1,48 @@
-
+const LightModal=document.querySelector('#modal');
+const LightboxModal=document.querySelector('#lightbox_modal');
    function createLightboxModal (listMedia) {
-   
     const divModal = document.createElement("div");
     divModal.classList.add("modal-content");
         // Button close
         const closeButton = document.createElement("button");
         closeButton.setAttribute("aria-label", "fermer la modale");
         closeButton.id = "close";
+        closeButton.setAttribute("tabindex", "2"); 
         const closeIcon = document.createElement("i");
         closeIcon.classList.add("fa-solid", "fa-xmark");
         closeButton.appendChild(closeIcon);
         closeButton.addEventListener('click', function(){
             event.preventDefault();
             closeLightBox();
+            body.classList.remove('no-scroll'); 
+            body.removeAttribute('tabIndex');
+            LightboxModal.removeAttribute('tabIndex');
         });
     divModal.appendChild(closeButton);
     listMedia.forEach((element) => {
         const mySlide = document.createElement("div");
         mySlide.setAttribute("class","mySlides"); 
         // Créez un élément video
-    if (element.url.endsWith(".mp4")){
+    if (element.mediaPath.endsWith(".mp4")){
         const videoElement = document.createElement('video');
-        videoElement.src = element.url;
+        videoElement.controls = true;
+        const sourceElement = document.createElement('source');
+        sourceElement.type = 'video/mp4';
+        sourceElement.src = element.mediaPath;
         videoElement.classList.add('imageLightbox');
         videoElement.alt = `Portrait de ${element.title}, photographe`;
+        videoElement.appendChild(sourceElement);
         mySlide.appendChild(videoElement);
     }
     else 
     { // Créez un élément img
         const imageElement = document.createElement('img');
-            imageElement.src = element.url;
+            imageElement.src = element.mediaPath;
             imageElement.alt = `Portrait de ${element.title}, photographe`;
             imageElement.classList.add('imageLightbox');
             mySlide.appendChild(imageElement);
     } 
-     // Create the title element
+     //  Créez un élément titre
      const titleElement = document.createElement("span");
      titleElement.setAttribute("class", "caption-container red");
      titleElement.setAttribute("aria-label", "le titre de media ouverte");
@@ -42,10 +50,11 @@
      mySlide.appendChild(titleElement);
     divModal.appendChild(mySlide);
     });
-    // Create the previous and next buttons
+    //  Créez previous et next boutons
     const prevButton = document.createElement("a");
     prevButton.classList.add("prev");
     prevButton.setAttribute("aria-label", "le bouton précedent");
+    prevButton.setAttribute("tabindex", "2"); 
     prevButton.innerHTML = "&#10094;";
     prevButton.addEventListener('click', function(){
         event.preventDefault();
@@ -54,19 +63,22 @@
     const nextButton = document.createElement("a");
     nextButton.classList.add("next");
     nextButton.setAttribute("aria-label", "le bouton suivant");
+    prevButton.setAttribute("tabindex", "2"); 
     nextButton.innerHTML = "&#10095;";
     nextButton.addEventListener('click', function(){
         event.preventDefault();
         plusSlides(1);
     });
     
-    // Append elements to the modal container
+    // Append elements à divModal
     divModal.appendChild(prevButton);
     divModal.appendChild(nextButton);
     return divModal;
 }
 let slideIndex=0;
+//recherche de la position de media
 function findIndexMedia(urlToSearch) {
+    const closeButton=document.querySelector('#close');
     let currentIndex=0;
     let listSlides = document.querySelectorAll(".imageLightbox");
     for (let index = 0; index < listSlides.length; index++) {
@@ -75,15 +87,21 @@ function findIndexMedia(urlToSearch) {
             currentIndex=index;
         }    
     }
-    openLightBox();   
+    openLightBox();
+    body.setAttribute("tabindex", "-1"); 
+    body.classList.add('no-scroll'); 
+    closeButton.focus(); 
+    LightboxModal.setAttribute('tabIndex', '2');
     showSlides(currentIndex);
 }
 
 function closeLightBox() {
      document.getElementById("lightbox_modal").style.display = "none";
+     
 }
 function openLightBox() {
     document.getElementById("lightbox_modal").style.display = "block";
+    
 }
 function plusSlides(n) {
   showSlides(slideIndex += n);

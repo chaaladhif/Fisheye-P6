@@ -6,7 +6,6 @@ function mediaTemplate(media) {
    const mediaPath= image ? `./assets/images/${photographerId}/${image}` : `./assets/images/${photographerId}/${video}`; 
 
     function getMediaCardDOM() {
-        const galery = document.querySelector('.galery');
         const figure = document.createElement('figure');
         figure.classList.add('photographer-card');
         figure.setAttribute('role', 'figure');
@@ -119,9 +118,8 @@ function mediaTemplate(media) {
             figure.appendChild(videoElement);
             figure.appendChild(divRow);
 }
-    galery.appendChild(figure);
     return figure;
 }
-    return { id, photographerId, title, image, video, mediaPath, likes, date,mediaTemplate, getMediaCardDOM }
-   
+    return { id, photographerId, title, image, video, mediaPath, likes, date, getMediaCardDOM }
+    
 }
