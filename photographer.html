@@ -21,9 +21,11 @@
   </header>
   <main id="main" aria-hidden="false">
     <section class="photograph-header" id="main_contact">
+      <h2 class="hidden">Photograph Header</h2>
       <button aria-label="Contactez-moi, Ouvrir le formulaire de contact" class="contact_button">Contactez-moi</button>
     </section>
-    <section class="galery">
+    <section class="galery ">
+      <h2 class="hidden">Photograph galery</h2>
       <div class="triContainer">
       </div>
     </section>
@@ -34,14 +36,14 @@
 
     </div>
   </div>
-  <div id="contact_modal" aria-hidden="true" role=”dialog”>
+  <div id="contact_modal" aria-hidden="true" role="dialog">
     <div class="modal">
       <header>
         <h1 class="titleModal">Contactez-moi </h1>
         <button aria-label="fermer la modale" class="close"><img src="assets/icons/close.svg"
             alt="fermer la modale"></button>
       </header>
-      <form aria-label="Formulaire de contact" action="" id="form" method="get" onsubmit="return validate(event);">
+      <form aria-label="Formulaire de contact" id="form" method="get" onsubmit="return validate(event);">
         <div class="contentForm">
           <div class="formData">
             <label for="firstname">Prénom</label><br>
