@@ -22,12 +22,15 @@ const LightboxModal=document.querySelector('#lightbox_modal');
     if (element.mediaPath.endsWith(".mp4")){
         const videoElement = document.createElement('video');
         videoElement.controls = true;
-        const sourceElement = document.createElement('source');
-        //sourceElement.type = 'video/mp4';
-        sourceElement.src = element.mediaPath;
+        videoElement.src = element.mediaPath;
+        const track = document.createElement('track');
+        track.kind = 'subtitles';
+        track.src = 'video.en.vtt';
+        track.srclang = 'en';
+        track.label = `Portrait de ${element.title}, photographe`; // Texte alternatif pour la vidéo
+        videoElement.appendChild(track);
         videoElement.classList.add('imageLightbox');
         videoElement.alt = `Portrait de ${element.title}, photographe`;
-        videoElement.appendChild(sourceElement);
         mySlide.appendChild(videoElement);
     }
     else 
@@ -81,8 +84,9 @@ function findIndexMedia(urlToSearch) {
             currentIndex=index;
         }    
     }
+
     openLightBox();
-    //closeButton.focus(); 
+    closeButton.focus(); 
     showSlides(currentIndex);
 }
 
@@ -123,11 +127,10 @@ function showSlides(n) {
         if ( document.getElementById("lightbox_modal").style.display === "block" && keyCode === 27) {
             closeLightBox();
         } else if ( document.getElementById("lightbox_modal").style.display === "block") {
-        if (keyCode === 39|| keyCode === 9) {
+        if (keyCode === 39) {
             plusSlides(1);
-        } else if (keyCode === 37 || keyCode === 7) {
+        } else if (keyCode === 37) {
             plusSlides(-1);
             }
         }
         });
-    

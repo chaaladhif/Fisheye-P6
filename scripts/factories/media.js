@@ -1,5 +1,3 @@
-//const body = document.body;
-// Déclarer une variable pour stocker la position de l'image actuelle
 function mediaTemplate(media) {
     let isLiked=false;
     const { id, photographerId, title, image, video, likes, date } = media;
@@ -12,9 +10,6 @@ function mediaTemplate(media) {
         figure.setAttribute('aria-label', title);
         if(image)
         {
-    /*const a = document.createElement('a');
-    a.href = '#';
-    a.setAttribute('aria-label', `Voir ${title}`);*/
     const img = document.createElement('img');
     img.classList.add('imageGalery');
     img.src = `./assets/images/${photographerId}/${image}`;
@@ -23,7 +18,6 @@ function mediaTemplate(media) {
        findIndexMedia(img.src);
 
     });
-   // a.appendChild(img);
     const divRow = document.createElement('div');
     divRow.classList.add('rowfigure');
     const h2 = document.createElement('h2');
@@ -62,9 +56,6 @@ function mediaTemplate(media) {
         }
         if(video)
         {
-            /*const a = document.createElement('a');
-            a.href = '#';
-            a.setAttribute('aria-label', `Voir ${title}`);*/
             const videoElement = document.createElement('video');
             videoElement.classList.add('videoGalery');
             videoElement.controls = true;
@@ -74,17 +65,15 @@ function mediaTemplate(media) {
             videoElement.addEventListener('click', (e) => {
                 e.preventDefault();
             findIndexMedia(sourceElement.src);
-                        console.log(sourceElement.src);
 
         });
-           // a.appendChild(videoElement)
             videoElement.appendChild(sourceElement);
             const track=document.createElement('track');
             track.kind="subtitles";
             track.src="video.en.vtt"
             track.srclang="en";
-            track.label="Anglais";
-            videoElement.appendChild(track)
+            track.label=`Portrait de ${title}, photographe`;
+            videoElement.appendChild(track);
             const divRow = document.createElement('div');
             divRow.classList.add('rowfigure');
             const h2 = document.createElement('h2');

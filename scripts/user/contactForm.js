@@ -19,20 +19,13 @@ function displayModal(e) {
   Contactmodal.style.display = "block";
   body.setAttribute('aria-hidden', 'true');
   Contactmodal.setAttribute('aria-hidden', 'false');
-  body.classList.add('no-scroll');
-  closed.setAttribute('tabIndex', 1);
-  body.setAttribute('tabIndex', -1);
-  Contactmodal.setAttribute('tabIndex', 1);
   closed.focus();
 }
 closed.addEventListener('click', closeModal)
 function closeModal(e) {
   e.preventDefault();
   Contactmodal.style.display = "none";
-  body.classList.remove('no-scroll');
-  body.removeAttribute('tabIndex');
-  Contactmodal.removeAttribute('tabIndex');
-  contactButton.focus();
+
 }
 const btnSubmit = document.querySelector("#btnSubmit");
 const contactModal=document.getElementById('contact_modal')
