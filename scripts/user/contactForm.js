@@ -3,7 +3,7 @@ const body = document.body;
 const main=document.getElementById('main')
 const modal=document.querySelector('.modal')
 const contactButton=document.querySelector('.contact_button')
-const closed=document.querySelector('.close')
+const closebutt=document.querySelector('.close')
 
  //fermer en cliquant sur echap
  document.addEventListener('keydown', function (e) {
@@ -19,9 +19,9 @@ function displayModal(e) {
   Contactmodal.style.display = "block";
   body.setAttribute('aria-hidden', 'true');
   Contactmodal.setAttribute('aria-hidden', 'false');
-  closed.focus();
+  closebutt.focus();
 }
-closed.addEventListener('click', closeModal)
+closebutt.addEventListener('click', closeModal)
 function closeModal(e) {
   e.preventDefault();
   Contactmodal.style.display = "none";
@@ -89,7 +89,7 @@ const email = document.getElementById('email');
 email.addEventListener('change', () => validateEmail());
 function validateEmail() {
   const emailValue = email.value;
-  const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+  const emailRegex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/;
   if (!emailRegex.test(emailValue)) {
     formData[2].setAttribute("data-error-visible", true);
     formData[2].setAttribute("data-error", "Veuillez entrer un email valide !");

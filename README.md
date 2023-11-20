@@ -1,5 +1,5 @@
 ![Alt text](<https://img.shields.io/badge/logo-javascript-blue?logo=javascript>)
-# Fisheye: Projet 6 de Openclassrooms
+📎 Fisheye: Projet 6 de Openclassrooms
 ------------------------------------------------------------------
 
 Créez un site accessible pour une plateforme de photographes
@@ -10,20 +10,20 @@ Assurer l'accessibilité d'un site web ♿
 Ecrire du code JavaScript maintenable 🧹
 Gérer les évènements d'un site avec JavaScript 🚀
 
-# Technologies:
+📎 Technologies:
 ---------------
 
 -HTML
 -CSS
 -Javascript
 
-## Page d'accueil :
+📎 Page d'accueil :
 -----------
 
 Liste des photographes avec nom, slogan, localisation, prix/heure, tags et une image miniature de leur choix.
 Au clic sur un tag, la liste des photographes est filtrée.
 Lorsque l'utilisateur clique sur la vignette d'un photographe, il est amené à sa page.
-## Pages des photographes :
+📎 Pages des photographes :
 ----------------
 Affiche une galerie des travaux du photographe.
 Les photographes peuvent montrer à la fois des photos et des vidéos.
@@ -40,7 +40,7 @@ Le formulaire de contact est une modale qui s'affiche par-dessus le reste.
 Il comprend des champs pour les noms, l'adresse électronique et le message.
 Plus tard, le bouton de contact enverra un message au photographe. Pour l'instant, afficher le contenu des trois champs dans les logs de la console.
 
-## Exigences supplémentaires :
+📎 Exigences supplémentaires :
 Le site doit être le plus accessible possible :
 Utilisez des éléments HTML "sémantiques" qui décrivent leur intention autant que possible.
 Lors de l’utilisation d’un élément personnalisé, utilisez des attributs ARIA si nécessaire.
