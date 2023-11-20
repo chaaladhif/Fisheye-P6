@@ -14,6 +14,8 @@ function mediaTemplate(media) {
     img.classList.add('imageGalery');
     img.src = `./assets/images/${photographerId}/${image}`;
     img.alt = `Portrait de ${title}, photographe`;
+    img.setAttribute('tabindex', '0');
+    img.focus
     img.addEventListener('click', () => {
        findIndexMedia(img.src);
 
@@ -59,6 +61,7 @@ function mediaTemplate(media) {
             const videoElement = document.createElement('video');
             videoElement.classList.add('videoGalery');
             videoElement.controls = true;
+            videoElement.setAttribute('tabindex', '0');
             const sourceElement = document.createElement('source');
             sourceElement.src = `./assets/images/${photographerId}/${video}`;
             sourceElement.type = 'video/mp4';

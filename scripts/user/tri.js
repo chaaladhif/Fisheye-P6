@@ -13,6 +13,9 @@ function tri(listMedia) {
     x.setAttribute('class', 'custom-select');
     x.style.width = '120px';
     const select1 = document.createElement('select');
+    select1.setAttribute('id', 'select1');
+    select1.setAttribute('tabindex', '0');
+    select1.focus();
     const option1 = document.createElement('option');
     option1.value = '0';
     option1.textContent = 'Popularité';
@@ -110,6 +113,16 @@ function tri(listMedia) {
           // Mettre à jour la galerie après le tri
           updateGallery(listMedia);
         });
+        document.addEventListener('keydown', function (e) {
+            if (e.keyCode === 9) {
+              // Touche Tab
+              // Ajoutez ici la logique pour gérer le focus sur les éléments, par exemple, le select
+              select1.focus();
+            }
+          });
         selectContainer.appendChild(x);
         return { ptri, selectContainer };
+
     }
+    
+  
