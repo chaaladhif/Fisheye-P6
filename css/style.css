@@ -34,7 +34,10 @@ h1 {
     gap: 70px;
     margin-top: 100px;
 }
-
+.heart {
+    color: inherit; /* Utilise la couleur du texte parent */
+    text-decoration: none; /* Supprime la soulignement par défaut des liens */
+}
 .photographer_section article {
     justify-self: center;
     display: flex;

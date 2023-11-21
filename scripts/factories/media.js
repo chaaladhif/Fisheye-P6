@@ -10,17 +10,19 @@ function mediaTemplate(media) {
         figure.setAttribute('aria-label', title);
         if(image)
         {
+            const a = document.createElement('a');
+            a.href = '#';
+            a.setAttribute('aria-label', `Voir ${title}`);
     const img = document.createElement('img');
     img.classList.add('imageGalery');
     img.src = `./assets/images/${photographerId}/${image}`;
     img.alt = `Portrait de ${title}, photographe`;
-    img.setAttribute('tabindex', '0');
-    img.focus
-    img.addEventListener('click', () => {
+    a.addEventListener('click', () => {
        findIndexMedia(img.src);
 
     });
-    const divRow = document.createElement('div');
+    a.appendChild(img);
+    const divRow = document.createElement('a');
     divRow.classList.add('rowfigure');
     const h2 = document.createElement('h2');
     h2.textContent = title;
@@ -30,9 +32,29 @@ function mediaTemplate(media) {
     const likesSpan = document.createElement('span');
     likesSpan.textContent = likes;
     likesSpan.setAttribute('class', 'likeNumber');
-    const heartIcon = document.createElement('span');
+    const heartIcon = document.createElement('a');
+     heartIcon.setAttribute('tabIndex', '0');
     heartIcon.setAttribute('class', 'heart');
     heartIcon.innerHTML = '<i class="fa-solid fa-heart size"></i>';
+    heartIcon.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+            event.preventDefault(); // Prevent the default Enter key behavior
+            // Toggle the liked status and update likes accordingly
+            if (!isLiked) {
+                likesSpan.textContent = likes + 1;
+                likesAndDislikes(1, likesSpan);
+                likesContainer.classList.remove('primary');
+                likesContainer.classList.add('secondary');
+            } else {
+                likesSpan.textContent = likes;
+                likesAndDislikes(-1, likesSpan);
+                likesContainer.classList.remove('secondary');
+                likesContainer.classList.add('primary');
+            }
+            // Toggle the liked status
+            isLiked = !isLiked;
+        }
+    });
     heartIcon.addEventListener('click', () => {
         if (!isLiked) {
             likesSpan.textContent=likes+1;
@@ -46,6 +68,7 @@ function mediaTemplate(media) {
             likesContainer.classList.remove('secondary');
             likesContainer.classList.add('primary');
         }
+        
         // Toggle the liked status
         isLiked = !isLiked;
         });
@@ -53,23 +76,27 @@ function mediaTemplate(media) {
     likesContainer.appendChild(heartIcon);
     divRow.appendChild(h2);
     divRow.appendChild(likesContainer);
-    figure.appendChild(img);
+    figure.appendChild(a);
+    //figure.appendChild(img);
     figure.appendChild(divRow);
         }
         if(video)
         {
+            const a = document.createElement('a');
+            a.href =  `./assets/images/${photographerId}/${video}`;
+            a.setAttribute('aria-label', `Voir ${title}`);
             const videoElement = document.createElement('video');
             videoElement.classList.add('videoGalery');
             videoElement.controls = true;
-            videoElement.setAttribute('tabindex', '0');
             const sourceElement = document.createElement('source');
             sourceElement.src = `./assets/images/${photographerId}/${video}`;
             sourceElement.type = 'video/mp4';
-            videoElement.addEventListener('click', (e) => {
+            a.addEventListener('click', (e) => {
                 e.preventDefault();
             findIndexMedia(sourceElement.src);
 
         });
+        a.appendChild(videoElement)
             videoElement.appendChild(sourceElement);
             const track=document.createElement('track');
             track.kind="subtitles";
@@ -87,9 +114,29 @@ function mediaTemplate(media) {
             const likesSpan = document.createElement('span');
             likesSpan.textContent = likes;
             likesSpan.setAttribute('class', 'likeNumber');
-            const heartIcon = document.createElement('span');
+            const heartIcon = document.createElement('a');
+            heartIcon.setAttribute('tabIndex', '0');
             heartIcon.setAttribute('class', 'heart');
             heartIcon.innerHTML = '<i class="fa-solid fa-heart size"></i>';
+            heartIcon.addEventListener('keydown', (event) => {
+                if (event.key === 'Enter') {
+                    event.preventDefault(); // Prevent the default Enter key behavior
+                    // Toggle the liked status and update likes accordingly
+                    if (!isLiked) {
+                        likesSpan.textContent = likes + 1;
+                        likesAndDislikes(1, likesSpan);
+                        likesContainer.classList.remove('primary');
+                        likesContainer.classList.add('secondary');
+                    } else {
+                        likesSpan.textContent = likes;
+                        likesAndDislikes(-1, likesSpan);
+                        likesContainer.classList.remove('secondary');
+                        likesContainer.classList.add('primary');
+                    }
+                    // Toggle the liked status
+                    isLiked = !isLiked;
+                }
+            });
             heartIcon.addEventListener('click', () => {
                 if (!isLiked) {
                     likesSpan.textContent=likes+1;
@@ -109,9 +156,8 @@ function mediaTemplate(media) {
             likesContainer.appendChild(likesSpan);
             likesContainer.appendChild(heartIcon);
             divRow.appendChild(h2);
-            figure.appendChild(videoElement);
             divRow.appendChild(likesContainer);
-            figure.appendChild(videoElement);
+            figure.appendChild(a);
             figure.appendChild(divRow);
 }
     return figure;

@@ -98,8 +98,8 @@ function tri(listMedia) {
     // Écoutez l'événement change sur l'élément select
     select1.addEventListener('change', () => {
         const selectedValue = select1.value;
-        console.log(listMedia);
-        // Ajoutez ici la logique de tri en fonction de la valeur sélectionnée
+        //console.log(listMedia);
+        // la logique de tri en fonction de la valeur sélectionnée
         if (selectedValue === '0') {
         sortedList= listMedia.sort((a, b) => b.likes - a.likes);
         }
