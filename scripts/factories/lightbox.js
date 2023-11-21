@@ -1,12 +1,14 @@
 const LightModal=document.querySelector('#modal');
 const LightboxModal=document.querySelector('#lightbox_modal');
    function createLightboxModal (listMedia) {
+    LightModal.setAttribute('tabindex', '0');
     const divModal = document.createElement("div");
     divModal.classList.add("modal-content");
         // Button close
         const closeButton = document.createElement("button");
         closeButton.setAttribute("aria-label", "fermer la modale");
         closeButton.id = "close";
+        closeButton.setAttribute('tabindex', '1');
         const closeIcon = document.createElement("i");
         closeIcon.classList.add("fa-solid", "fa-xmark");
         closeButton.appendChild(closeIcon);
@@ -53,6 +55,7 @@ const LightboxModal=document.querySelector('#lightbox_modal');
     const prevButton = document.createElement("a");
     prevButton.classList.add("prev");
     prevButton.setAttribute("aria-label", "le bouton précedent");
+    prevButton.setAttribute('tabIndex', '1');
     prevButton.innerHTML = "&#10094;";
     prevButton.addEventListener('click', function(){
         event.preventDefault();
@@ -61,6 +64,7 @@ const LightboxModal=document.querySelector('#lightbox_modal');
     const nextButton = document.createElement("a");
     nextButton.classList.add("next");
     nextButton.setAttribute("aria-label", "le bouton suivant");
+    nextButton.setAttribute('tabIndex', '1');
     nextButton.innerHTML = "&#10095;";
     nextButton.addEventListener('click', function(){
         event.preventDefault();
