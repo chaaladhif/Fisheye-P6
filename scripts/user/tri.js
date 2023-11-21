@@ -1,5 +1,3 @@
-
-
 function tri(listMedia) {
     //console.log(listMedia);
     const ptri = document.createElement('label');
@@ -9,13 +7,12 @@ function tri(listMedia) {
 
     const selectContainer = document.createElement('div');
     selectContainer.classList.add('select-container');
+    selectContainer.setAttribute('tabindex', '0');
     const x = document.createElement('div');
     x.setAttribute('class', 'custom-select');
     x.style.width = '120px';
     const select1 = document.createElement('select');
     select1.setAttribute('id', 'select1');
-    select1.setAttribute('tabindex', '0');
-    select1.focus();
     const option1 = document.createElement('option');
     option1.value = '0';
     option1.textContent = 'Popularité';
@@ -39,16 +36,41 @@ function tri(listMedia) {
 
     a = document.createElement("DIV");
     a.setAttribute("class", "select-selected");
-    a.innerHTML = select1.options[select1.selectedIndex].innerHTML; // Correction ici
+    a.innerHTML = select1.options[select1.selectedIndex].innerHTML;
     x.appendChild(a);
 
     b = document.createElement("DIV");
-    b.setAttribute("class", "select-items select-hide");
+b.setAttribute("class", "select-items select-hide");
 
-    for (let j = 0; j < select1.options.length; j++) {
-        c = document.createElement("DIV");
-        c.innerHTML = select1.options[j].innerHTML;
-        c.addEventListener("click", function (e) {
+for (let j = 0; j < select1.options.length; j++) {
+    c = document.createElement("DIV");
+    c.innerHTML = select1.options[j].innerHTML;
+    c.setAttribute("tabindex", "0"); // Add tabindex
+    c.addEventListener("click", function (e) {
+        // Update the original select box and the selected item
+        select1.selectedIndex = j;
+        a.innerHTML = this.innerHTML;
+
+        // Remove the "same-as-selected" class from other items
+        var y = this.parentNode.getElementsByClassName("same-as-selected");
+        for (let k = 0; k < y.length; k++) {
+            y[k].removeAttribute("class");
+        }
+
+        this.setAttribute("class", "same-as-selected");
+
+        // Close the list
+        b.classList.add('select-hide');
+        a.classList.remove("select-arrow-active");
+
+        // Trigger change event on the select element
+        select1.dispatchEvent(new Event('change'));
+    });
+
+    // Add keydown event listener for keyboard navigation
+    c.addEventListener("keydown", function (e) {
+        if (e.key === 'Enter') {
+            e.preventDefault(); // Prevent the default Enter key behavior
             // Update the original select box and the selected item
             select1.selectedIndex = j;
             a.innerHTML = this.innerHTML;
@@ -67,11 +89,21 @@ function tri(listMedia) {
 
             // Trigger change event on the select element
             select1.dispatchEvent(new Event('change'));
-        });
-        b.appendChild(c);
-    }
+        } else if (e.key === 'Tab') {
+            // Handle Tab key for navigation
+            e.preventDefault();
+            const nextIndex = (j + 1) % select1.options.length;
+            const nextOption = b.querySelector(`div:nth-child(${nextIndex + 1})`);
+            if (nextOption) {
+                nextOption.focus();
+            }
+        }
+    });
 
-    x.appendChild(b);
+    b.appendChild(c);
+}
+
+x.appendChild(b);
 
     // Écoutez l'événement click sur l'élément select-selected
     a.addEventListener('click', function (e) {
@@ -85,7 +117,7 @@ function tri(listMedia) {
         closeAllSelect();
         a.classList.remove("select-arrow-active");
     });
-
+    
     function closeAllSelect() {
         var x, y;
         x = document.getElementsByClassName("select-items");
@@ -94,7 +126,17 @@ function tri(listMedia) {
             y[i].classList.remove("select-arrow-active");
             x[i].classList.add('select-hide');
         }
+        
     }
+    selectContainer.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+            event.preventDefault(); // Prevent the default Enter key behavior
+            // Open the select and highlight the first option
+            a.classList.add("select-arrow-active");
+            b.classList.remove('select-hide');
+
+}});
+
     // Écoutez l'événement change sur l'élément select
     select1.addEventListener('change', () => {
         const selectedValue = select1.value;
@@ -113,16 +155,7 @@ function tri(listMedia) {
           // Mettre à jour la galerie après le tri
           updateGallery(listMedia);
         });
-        document.addEventListener('keydown', function (e) {
-            if (e.keyCode === 9) {
-              // Touche Tab
-              // Ajoutez ici la logique pour gérer le focus sur les éléments, par exemple, le select
-              select1.focus();
-            }
-          });
         selectContainer.appendChild(x);
         return { ptri, selectContainer };
 
     }
-    
-  

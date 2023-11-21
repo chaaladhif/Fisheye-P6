@@ -233,6 +233,7 @@ object-fit: cover;
 .column{
   width: 100%;
 }
+
 #close{
   color: #901C1C;
   position: absolute;
@@ -287,7 +288,10 @@ gap: 1em;
 .custom-select {
     position: relative;
   }
-  
+ 
+.select-selected:hover{
+  background-color: var(--secondary-color);
+}
   .custom-select select {
     display: none; /*hide original SELECT element:*/
   }

@@ -33,7 +33,7 @@ function mediaTemplate(media) {
     likesSpan.textContent = likes;
     likesSpan.setAttribute('class', 'likeNumber');
     const heartIcon = document.createElement('a');
-     heartIcon.setAttribute('tabIndex', '0');
+    heartIcon.setAttribute('tabIndex', '0');
     heartIcon.setAttribute('class', 'heart');
     heartIcon.innerHTML = '<i class="fa-solid fa-heart size"></i>';
     heartIcon.addEventListener('keydown', (event) => {
