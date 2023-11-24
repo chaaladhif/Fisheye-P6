@@ -38,16 +38,13 @@ pageId();
     const header =  photographerModel.getHeaderPhotographer();
     document.getElementById("main").appendChild(header);
     document.getElementById("main").insertBefore(document.querySelector(".photograph-header"), document.querySelector(".galery"));
-   
-    
     // Récupérez les médias spécifiques au photographe actuel
      // Créez la structure pour les médias
      let totalLikes=0;
      photographerMedia.forEach(mediaItem => {
      const mediaModel = mediaTemplate(mediaItem);
      totalLikes += mediaModel.likes;
-     const mediaCardDOM = mediaModel.getMediaCardDOM();    // Pass the index of the current media card in the list
-    //listMedia.push({photographerId: mediaModel.photographerId,title:mediaModel.title, image: mediaModel.image, video: mediaModel.video, url:mediaModel.mediaPath, date:mediaModel.date, likes:mediaModel.likes});
+     const mediaCardDOM = mediaModel.getMediaCardDOM();    
     listMedia.push(mediaModel);
     divMediaContainer.appendChild(mediaCardDOM);
      });

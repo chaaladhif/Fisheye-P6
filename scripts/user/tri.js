@@ -1,4 +1,5 @@
 function tri(listMedia) {
+    //console.log(listMedia);
     const ptri = document.createElement('label');
     ptri.classList.add('ptri');
     ptri.textContent = 'Trier par';
@@ -44,7 +45,7 @@ b.setAttribute("class", "select-items select-hide");
 for (let j = 0; j < select1.options.length; j++) {
     c = document.createElement("DIV");
     c.innerHTML = select1.options[j].innerHTML;
-    c.setAttribute("tabindex", "-1"); // Add tabindex
+    c.setAttribute("tabindex", "0"); // Add tabindex
     c.addEventListener("click", function (e) {
         // Update the original select box and the selected item
         select1.selectedIndex = j;

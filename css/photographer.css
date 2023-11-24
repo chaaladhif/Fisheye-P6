@@ -349,4 +349,6 @@ gap: 1em;
   .same-as-selected{
     display: none;
   }
-
+  .select-selected.hidden {
+    display: none;
+}
